@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+    <!-- Meta -->
+    <meta charset="utf-8"/>
+    <title>California-Asia Business Council</title>
+    <meta name="keywords" content="california, asia, business, council, cal-asia">
+    <meta name="author" content="Shin Thu San www.theyangonite.com">
+    
+    <!-- Mobile Specific --> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+
+    <!-- Boostrap CSS -->
+    <link href = "css/bootstrap.min.css" rel = "stylesheet">
+    <link rel ="shortcut icon" href="/favicon.ico">
+    <link href = "css/bootstrap-glyphicons.css" rel = "stylesheet">
+
+    <!-- Custom CSS --> 
+    <link href = "css/styles.css" rel = "stylesheet">
+    <!-- Angular JS -->
+    <base href='/'>
+
+  </head>
+  
+  <body ng-app="calasia">
+  
+    <!-- I Navigation --> 
+    <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container" id="nav-container-inner">
+        <div class="navbar-header">
+          
+          <button type="button" class="navbar-toggle" data-target="#nav_list" data-toggle="collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+
+          <a class="navbar-brand" href="#"><img src="img/logoblk.png" alt="logo"></a>
+
+        </div><!-- end navbar-header -->
+
+        <div class="collapse navbar-collapse" id = "nav_list" >
+          <ul class="nav navbar-nav navbar-right">
+            <li class="active"><a href="#">Home</a></li>
+
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Events<strong class="caret"></strong></a>
+              <ul class="dropdown-menu">
+                <li><a href="#">Cal-Asia Programs</a></li>
+                <li><a href="#">Calendar</a></li>
+              </ul><!-- end dropdown-menu-->
+            </li>
+
+            <li><a href="#">Resources</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Contact</a></li>
+            <li><a href="#">Asia Night</a></li>
+          
+          </ul><!-- end nav -->
+        </div><!-- end nav-collapse --> 
+      </div><!-- end navbar-container-inner --> 
+    </nav><!-- end navbar-fixed top -->
+
+  <div class="container" id="main">
+    <!-- Mission --> 
+    <div id="mission-box">
+      <div class="row">
+        <div class="col-lg-12">
+          <p class="text-center" id="mission-text">Cal-Asia's <b>mission</b> is to foster business between California and the economies of Asia</p>
+        </div><!-- end col-lg-12 -->
+      </div><!-- end row -->
+    </div><!-- end container-fluid -->
+    <div ng-view>
+    </div>
+  </div> <!-- end main -->
+  <section class="container">
+    <footer>
+      <div class="row">
+        <div class="col-md-4 col-sm-4">
+          <div class="footerContent">
+            <strong>Economy pages<strong>
+            <div class="row">
+              <div class="col-sm-6">
+                <ul style="list-style-type:none; padding-left: 5px; margin-left: 0px"><small>
+                  <li><a href="#"> Australia </a></li>
+                  <li><a href="#"> Brunei </a></li>
+                  <li><a href="#"> Cambodia </a></li>
+                  <li><a href="#"> Indonesia </a></li>
+                  <li><a href="#"> India </a></li>
+                  <li><a href="#"> Japan </a></li> 
+                  <li><a href="#"> Korea </a></li>
+                  <li><a href="#"> Laos </a></li>
+                  <li><a href="#"> Malaysia </a></li>
+                </small></ul>
+              </div><!-- end col-sm-6  -->
+
+              <div class="col-sm-6">
+                <ul style="list-style-type:none; padding-left: 5px; margin-left:-20px;"><small>
+                  <li><a href="#"> Myanmar </a></li>
+                  <li><a href="#"> New Zealand </a></li>
+                  <li><a href="#"> Papua New Guinea </a></li>
+                  <li><a href="#"> People's Republic of China </a></li>
+                  <li><a href="#"> Philippines </a></li>
+                  <li><a href="#"> Singapore </a></li>
+                  <li><a href="#"> Thailand </a></li>
+                  <li><a href="#"> Timor-Leste </a></li>
+                  <li><a href="#"> Vietnam </a></li>
+                </small></ul>
+              </div><!-- end col-sm-6  -->
+            </div><!-- end Row -->
+          </div><!-- end footerContent --> 
+        </div>
+
+        <div class="col-md-4 col-sm-4">
+          <div class="footerContent"> 
+            <p class="text-center">
+              <img src="img/logowhiteFooter.png"><br><br>
+              <strong>About Cal-Asia</strong><br>
+              <small><a href="#">Mission and History</a><br>
+                   <a href="#">Board of Directors</a><br>
+                   <a href="#">Become a Member</a><br>
+                   <a href="#">Sponsorship Opportunities</a></small></p>
+          </div><!-- end FooterContent -->
+        </div><!-- end col-md-4 --> 
+
+        <div class="col-md-4 col-sm-4">
+          <div class="footerContent">
+            <p><strong>Cal-Asia Projects</strong><br><br>
+              <a href="#">Great Asia Build</a><br>
+              <a href="#">Cal-Asia Business Outlook</a><br>
+              <a href="#">Internship Opportunities</a><br><br>
+
+              Connect with Us!<br>
+            </p>
+          </div><!-- end FooterContent -->
+        </div><!-- end col-md-4 --> 
+      </div><!--end footer row -->
+
+    </footer>
+    <section id="copyright">
+      <div class="row" >
+        <div class="col-lg-12">
+        &copy; 2015 California-Asia Business Council. All Rights Reserved.
+        </div>
+      </div>
+    </section>
+  </div>
+  <!-- All Javascript at the bottom of the page for faster page loading -->
+    
+  <!-- First try for the online version of jQuery-->
+  <script src="http://code.jquery.com/jquery.js"></script>
+  
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="js/bootstrap.min.js"></script>
+  
+  <!-- Custom JS -->
+  <script src="js/script.js"></script>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular-route.js"></script>
+  <script src="js/calasia.js"></script>
+  </body>
+
+</html>

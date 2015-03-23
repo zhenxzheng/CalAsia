@@ -1,0 +1,32 @@
+<div class="row">
+	<div class="col-lg-12" style="text-align:center">
+		<h1>[[count]] Events</h1>
+		<p><a href="/addEvent">Add Event +</a></p>
+	</div>
+	<div class="col-lg-12">
+		<div class="table-responsive">
+			<table class="table table-hover">
+				<thead>
+				  <tr>
+				  	<th>Event Name</th>
+				  	<th>Date</th>	
+				  	<th>Location</th>
+				  	<th>Registration Link</th>
+				  	<th>Sponsors and Supporters</th>
+				  	<th></th>
+				  </tr>
+				</thead>		
+				<tbody>
+					<tr ng-repeat="event in events" id="[[event._id]]">
+						<th scope="row">[[event.name]]</th>
+						<td>[[event.date.date]]</td>
+						<td>[[event.location]]</td>
+						<td>Register by [[event.registration.date]]</td>
+						<td>[[event.sponsors]]</td>
+						<td><p class="glyphicon glyphicon-trash" style="color:red;cursor:pointer" ng-click="deleteEvent([[event._id]])"></p></td>
+					</tr>
+				</tbody>
+			</table>
+		</div><!-- end div table-responsive -->
+	</div><!-- end col-lg-12 -->
+</div><!-- end row --> 

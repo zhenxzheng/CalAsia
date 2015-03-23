@@ -1,0 +1,50 @@
+<form style="background:white;color:#777">
+  <div class="row">
+    <h2 class="col-md-12 text-center">
+      Add Event
+    </h2>
+  </div>
+  <div style="padding:10px">
+    <h4> Event Name:</h4>
+    <input class="form-control" ng-model="form.name" style="width:100%" placeholder="Headline...">
+  </div>
+  <div>
+    <div style="display:inline-block; padding:10px; width:33%">
+      <h4> Date:</h4>
+      <input id="test" class="form-control" type="date" style="width:100%" ng-model="form.date.full">
+    </div>
+    <div style="display:inline-block; padding:10px; width:33%">
+      <h4> Location:</h4>
+      <input class="form-control" style="width:100%" placeholder="Address" ng-model="form.location">
+    </div>
+    <div style="display:inline-block; padding:10px; width:33%">
+      <h4> Price </h4>
+      <input class="form-control" style="width:100%" placeholder="123" type="number" ng-model="form.price">
+    </div>
+    <div style="display:inline-block; padding:10px; width:33%">
+      <h4> Registration Deadline:</h4>
+      <input id="test" class="form-control" type="date" style="width:100%" ng-model="form.registration.date">
+    </div>
+    <div style="display:inline-block; padding:10px; width:33%">
+      <h4> Registration URL:</h4>
+      <input class="form-control" style="width:100%" placeholder="www.example.com" ng-model="form.registration.url">
+    </div>
+  </div>
+  <div style="padding:10px">
+    <h4> Description:</h4>
+    <textarea class="form-control" style="width:100%; height:20em" ng-model="form.description"></textarea>
+    <h4>Scheduel<h4>
+    <textarea class="form-control" style="width:100%; height:20em" ng-model="form.schedule"></textarea>
+    <h4> speakers(Separate multiple images with blank space " ")</h4>
+    <input class="form-control" placeholder="Speakers" ng-model="form.speakers">
+    <h4> Sponsors(Separate multiple images with blank space " ")</h4>
+    <input class="form-control" placeholder="Sponsors" ng-model="form.sponsors">
+    <h4> ImageUrl(Separate multiple images with blank space " ")</h4>
+    <input class="form-control" placeholder="img1 img2 img3..." ng-model="form.image">
+    <div style="margin-top:1em" class="text-center">
+      <a style="display:inline-block">
+        <button ng-click="submitEvent()">Submit News</button>
+      </a>
+    </div>
+  </div>
+</form>
