@@ -16,13 +16,13 @@ Notes:	 Hand coded for California-Asia Business Council (Cal-Asia)
 body{
    background: #D3D3CC;
    color: #eee;
+   font-size: 12px;
 }
 
 #mission-box{
   background: #862600;
   color: #fff;
   height: 50px;
-  margin-top: 130px;
   border-bottom-width: 10px;
   border-bottom-color: #B15000;
   border-bottom-style: solid;
@@ -37,32 +37,6 @@ body{
   color:black;
 }
 
-#main>div:nth-child(2){
-  background:white;
-  color:black;
-}
-footer{
-  background-color: #1F1F1F;
-  border-top: solid 5px #537368;
-  color: chocolate;
-  padding: 30px 20px;
-}
-
-footer a{
-  color:white;
-}
-
-footer a:hover {
-  color: white;
-}
-
-footer .col-md-4:last-child .footerContent{
-  border-right:none;
-}
-
-.footerContent{
-  border-right:solid 1px white;
-}
 
 #calendarBox {
   background-color: white;
@@ -151,10 +125,6 @@ body {
   color: #000000;
 }
 
-.navbar-fixed-top {
-   min-height:120px;
-}
-
 .navbar-brand{
    z-index: -10
 }
@@ -211,6 +181,29 @@ body {
 
 thead {
   background-color: #eee;
+}
+
+footer{
+  background-color: #1F1F1F;
+  border-top: solid 5px #537368;
+  color: chocolate;
+  padding: 30px 20px;
+}
+
+footer a{
+  color:white;
+}
+
+footer a:hover {
+  color: white;
+}
+
+footer .col-md-4:last-child .footerContent{
+  border-right:none;
+}
+
+.footerContent{
+  border-right:solid 1px white;
 }
 
 /* --------------------------------------

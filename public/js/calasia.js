@@ -67,7 +67,15 @@ angular.module('calasia',['ngRoute'])
 			else{
 				$scope.form.schedule = $scope.form.schedule.match(/^.+/mg);
 			}
-
+			if($scope.form.time){
+				var hours = $scope.form.time.getHours();
+				var minutes = $scope.form.time.getMinutes();
+				var AMPM = hours >= 12 ? 'PM' : 'AM';
+				hours = hours % 12;
+				hours = hours ? hours : 12;
+				minutes = minutes < 10 ? '0'+minutes : minutes;
+				$scope.form.time = hours + ':' + minutes + ' ' + AMPM;
+			}
 			$http.post('/api/events/new', $scope.form).
 			  success(function(data) {
 			  	alert("event added");

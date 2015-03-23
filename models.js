@@ -6,7 +6,9 @@ var EventSchema = new mongoose.Schema({
 		full:Date,
 		date:String,
 	},
+	time:String,
 	location:String,//
+	capacity:Number,
 	description:[String],//
 	image:[String],
 	speakers:[String],
