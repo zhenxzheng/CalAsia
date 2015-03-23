@@ -8,9 +8,9 @@ angular.module('calasia',['ngRoute'])
 			.when('/programs',{
 				templateUrl: 'partials/programs'
 			})
-			.when('/calendard',{
-				templateUrl: 'partials/calendard',
-				controller:"calendardCtrl"
+			.when('/calendar',{
+				templateUrl: 'partials/calendar',
+				controller:"calendarCtrl"
 			})
 			.when('/login',{
 				templateUrl: 'partials/login'
@@ -30,7 +30,7 @@ angular.module('calasia',['ngRoute'])
 		$interpolateProvider.startSymbol('[[');
   		$interpolateProvider.endSymbol(']]');
 	}])
-	.controller("calendardCtrl",function ($scope, $http){
+	.controller("calendarCtrl",function ($scope, $http){
 		$http.get("/api/events").success(function(data, status, headers, config){
 			$scope.events = data;
 		})
