@@ -55,9 +55,9 @@ angular.module('calasia',['ngRoute'])
 				var weekdayArr = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 				$scope.form.date.string = weekdayArr[$scope.form.date.full.getDay()] +", "+monthArr[$scope.form.date.full.getMonth()]+" "+$scope.form.date.full.getDate()+", "+$scope.form.date.full.getFullYear();
 			}
-			if($scope.form.images!=undefined) $scope.form.images = $scope.form.images.split(" ");
-			if($scope.form.speakers!=undefined) $scope.form.speakers = $scope.form.speakers.split(" ");
-			if($scope.form.sponsors!=undefined) $scope.form.sponsors = $scope.form.sponsors.split(" ");
+			if($scope.form.images!=undefined) $scope.form.images = $scope.form.images.split(/, */);
+			if($scope.form.speakers!=undefined) $scope.form.speakers = $scope.form.speakers.split(/, */);
+			if($scope.form.sponsors!=undefined) $scope.form.sponsors = $scope.form.sponsors.split(/, */);
 
 			if ($scope.form.description===undefined){
 				alert("Empty body");
@@ -97,9 +97,9 @@ angular.module('calasia',['ngRoute'])
 			$scope.form = data.event;
 			$scope.form.description = $scope.form.description.join("\r\r");
 			$scope.form.schedule = $scope.form.schedule.join("\r\r");
-			if($scope.form.speakers!=undefined) $scope.form.speakers = $scope.form.speakers.join(" ");
-			if($scope.form.sponsors!=undefined) $scope.form.sponsors = $scope.form.sponsors.join(" ");
-			if($scope.form.image!=undefined) $scope.form.image = $scope.form.image.join(" ");
+			if($scope.form.speakers!=undefined) $scope.form.speakers = $scope.form.speakers.join(", ");
+			if($scope.form.sponsors!=undefined) $scope.form.sponsors = $scope.form.sponsors.join(", ");
+			if($scope.form.image!=undefined) $scope.form.image = $scope.form.image.join(", ");
 			$scope.form.date.full = new Date($scope.form.date.full);
 			$scope.form.eventTime.full = new Date($scope.form.eventTime.full);
 			$scope.form.registration.date = new Date($scope.form.registration.date);
@@ -113,9 +113,9 @@ angular.module('calasia',['ngRoute'])
 				var weekdayArr = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 				$scope.form.date.string = weekdayArr[$scope.form.date.full.getDay()] +", "+monthArr[$scope.form.date.full.getMonth()]+" "+$scope.form.date.full.getDate()+", "+$scope.form.date.full.getFullYear();
 			}
-			if($scope.form.images!=undefined) $scope.form.images = $scope.form.images.split(" ");
-			if($scope.form.speakers!=undefined) $scope.form.speakers = $scope.form.speakers.split(" ");
-			if($scope.form.sponsors!=undefined) $scope.form.sponsors = $scope.form.sponsors.split(" ");
+			if($scope.form.images!=undefined) $scope.form.images = $scope.form.images.split(/, */);
+			if($scope.form.speakers!=undefined) $scope.form.speakers = $scope.form.speakers.split(/, */);
+			if($scope.form.sponsors!=undefined) $scope.form.sponsors = $scope.form.sponsors.split(/, */);
 
 			if ($scope.form.description===undefined){
 				alert("Empty body");

@@ -120,7 +120,6 @@ function checkPastEvents(){
 		.sort('-date.full')
 		.exec(renderEvents);
 	function renderEvents (err, events){
-		console.log(events);
 		if(err) {
 			console.log(err);
 			return false;
