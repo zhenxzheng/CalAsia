@@ -1,12 +1,16 @@
 var mongoose = require('mongoose');
 
 var EventSchema = new mongoose.Schema({
+	eventType:String,
 	name:String,//
 	date:{//
 		full:Date,
-		date:String,
+		string:String,
 	},
-	time:String,
+	eventTime:{
+		full:Date,
+		string:String
+	},
 	location:String,//
 	capacity:Number,
 	description:[String],//
@@ -18,7 +22,8 @@ var EventSchema = new mongoose.Schema({
 	schedule:[String],
 	registration:{
 		url:String,
-		date:String
-	}
+		date:Date
+	},
+	past:Boolean
 })
 exports.Event = mongoose.model('Event',EventSchema);

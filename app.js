@@ -94,7 +94,11 @@ app.get('/partials/:name', routes.partials);
 
 // JSON API
 app.get('/api/events', api.events);
+app.get('/api/event/:id', api.oneEvent);
+app.get('/api/upcomingEvents', api.upcomingEvents);
+app.get('/api/pastEvents', api.pastEvents);
 app.post('/api/events/new', api.addEvent);
+app.put('/api/event/:id', api.editEvent);
 app.delete('/api/events/:id', api.deleteEvent);
 
 app.post('/api/login', function (req, res) {

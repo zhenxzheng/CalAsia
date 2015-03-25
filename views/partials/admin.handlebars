@@ -1,32 +1,38 @@
-<div class="row">
-	<div class="col-lg-12" style="text-align:center">
-		<h1>[[count]] Events</h1>
-		<p><a href="/addEvent">Add Event +</a></p>
-	</div>
-	<div class="col-lg-12">
-		<div class="table-responsive">
-			<table class="table table-hover">
-				<thead>
-				  <tr>
-				  	<th>Event Name</th>
-				  	<th>Date</th>	
-				  	<th>Location</th>
-				  	<th>Registration Link</th>
-				  	<th>Sponsors and Supporters</th>
-				  	<th></th>
-				  </tr>
-				</thead>		
-				<tbody>
-					<tr ng-repeat="event in events" id="[[event._id]]">
-						<th scope="row">[[event.name]]</th>
-						<td>[[event.date.date]]</td>
-						<td>[[event.location]]</td>
-						<td>Register by [[event.registration.date]]</td>
-						<td>[[event.sponsors]]</td>
-						<td><p class="glyphicon glyphicon-trash" style="color:red;cursor:pointer" ng-click="deleteEvent([[event._id]])"></p></td>
-					</tr>
-				</tbody>
-			</table>
-		</div><!-- end div table-responsive -->
-	</div><!-- end col-lg-12 -->
-</div><!-- end row --> 
+<div id="calendarBox">
+	<p class="lead" style="padding-top:20px; text-align:center;">
+		[[count]] Events
+	</p>
+	<p class="text-center"><a href="/addEvent">Add Event +</a></p>
+	<div class="row">
+		<div class="col-lg-12">
+			<div class="table-responsive">
+				<table class="table table-hover">
+					<thead>
+					  <tr>
+					  	<th>Event Name</th>
+					  	<th>status</th>
+					  	<th>Date</th>	
+					  	<th>Location</th>
+					  	<th>Registration Link</th>
+					  	<th>Sponsors and Supporters</th>
+					  	<th>Edit</th>
+					  	<th>Delete</th>	
+					  </tr>
+					</thead>		
+					<tbody>
+						<tr ng-repeat="event in events" id="[[event._id]]">
+							<th scope="row">[[event.name]]</th>
+							<td><span ng-hide="event.past">Upcoming</span><span ng-show="event.past">Past</span></td>
+							<td>[[event.date.string]]</td>
+							<td>[[event.location]]</td>
+							<td>Register by [[event.registration.date]]</td>
+							<td>[[event.sponsors]]</td>
+							<td><a href="/editEvent/[[event._id]]"><span class="glyphicon glyphicon-pencil"></span></a></td>
+							<td><p class="glyphicon glyphicon-trash" style="color:red;cursor:pointer" ng-click="deleteEvent([[event._id]])"></p></td>
+						</tr>
+					</tbody>
+				</table>
+			</div><!-- end div table-responsive -->
+		</div><!-- end col-lg-12 -->
+	</div><!-- end row --> 
+</div>

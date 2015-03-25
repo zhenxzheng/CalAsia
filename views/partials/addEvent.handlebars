@@ -1,10 +1,23 @@
 <form style="background:white;color:#777">
   <div class="row">
     <h2 class="col-md-12 text-center">
-      Add Event
+      Event
     </h2>
   </div>
   <div style="padding:10px">
+    <h4> Type of Event: </h4>
+    <div class="radio">
+      <label>
+        <input type="radio" name="eventType" id="optionsRadios1" value="internal" checked>
+        Internal
+      </label>
+    </div>
+    <div class="radio">
+      <label>
+        <input type="radio" name="eventType" id="optionsRadios2" value="external">
+        External
+      </label>
+    </div>
     <h4> Event Name:</h4>
     <input class="form-control" ng-model="form.name" style="width:100%" placeholder="Cal-Asian Event">
   </div>
@@ -15,14 +28,14 @@
     </div>
     <div style="display:inline-block; padding:10px; width:33%">
       <h4> Time:</h4>
-      <input class="form-control" type="time" style="width:100%" ng-model="form.time">
+      <input class="form-control" type="time" style="width:100%" ng-model="form.eventTime.full">
     </div>
     <div style="display:inline-block; padding:10px; width:33%">
       <h4> Location:</h4>
       <input class="form-control" style="width:100%" placeholder="Address" ng-model="form.location">
     </div>
     <div style="display:inline-block; padding:10px; width:33%">
-      <h4> Price </h4>
+      <h4> Price: <span ng-show="form.price">$[[form.price]]</span> </h4>
       <input class="form-control" style="width:100%" placeholder="123" type="number" ng-model="form.price">
     </div>
     <div style="display:inline-block; padding:10px; width:33%">
@@ -34,7 +47,7 @@
       <input class="form-control" style="width:100%" placeholder="www.example.com" ng-model="form.registration.url">
     </div>
     <div style="display:inline-block; padding:10px; width:33%">
-      <h4> Capacity:</h4>
+      <h4> Capacity: [[form.capacity]]</h4>
       <input class="form-control" type="number" style="width:100%" placeholder="60" ng-model="form.capacity">
     </div>
   </div>
@@ -51,7 +64,7 @@
     <input class="form-control" placeholder="img1 img2 img3..." ng-model="form.image">
     <div style="margin-top:1em" class="text-center">
       <a style="display:inline-block">
-        <button ng-click="submitEvent()">Submit Event</button>
+        <button class="btn btn-primary" ng-click="submitEvent()">Submit Event</button>
       </a>
     </div>
   </div>
