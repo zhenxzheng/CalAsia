@@ -59,18 +59,10 @@ angular.module('calasia',['ngRoute'])
 			if($scope.form.speakers!=undefined) $scope.form.speakers = $scope.form.speakers.split(/, */);
 			if($scope.form.sponsors!=undefined) $scope.form.sponsors = $scope.form.sponsors.split(/, */);
 
-			if ($scope.form.description===undefined){
-				alert("Empty body");
-				return;
-			}
-			else{
+			if ($scope.form.description!=undefined){
 				$scope.form.description = $scope.form.description.match(/^.+/mg);
 			}
-			if ($scope.form.schedule===undefined){
-				alert("Empty body");
-				return;
-			}
-			else{
+			if ($scope.form.schedule!=undefined){
 				$scope.form.schedule = $scope.form.schedule.match(/^.+/mg);
 			}
 			if($scope.form.eventTime.full){
@@ -117,18 +109,10 @@ angular.module('calasia',['ngRoute'])
 			if($scope.form.speakers!=undefined) $scope.form.speakers = $scope.form.speakers.split(/, */);
 			if($scope.form.sponsors!=undefined) $scope.form.sponsors = $scope.form.sponsors.split(/, */);
 
-			if ($scope.form.description===undefined){
-				alert("Empty body");
-				return;
-			}
-			else{
+			if ($scope.form.description!=undefined){
 				$scope.form.description = $scope.form.description.match(/^.+/mg);
 			}
-			if ($scope.form.schedule===undefined){
-				alert("Empty Schedule");
-				return;
-			}
-			else{
+			if ($scope.form.schedule!=undefined){
 				$scope.form.schedule = $scope.form.schedule.match(/^.+/mg);
 			}
 			if($scope.form.eventTime.full){
