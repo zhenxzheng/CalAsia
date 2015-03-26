@@ -21,7 +21,7 @@
 					  </tr>
 					</thead>		
 					<tbody>
-						<tr ng-repeat="event in events | filter:search | orderBy:'eventTime.full'" id="[[event._id]]">
+						<tr ng-repeat="event in events | filter:search | orderBy:'-date.full'" id="[[event._id]]">
 							<th scope="row">[[event.name]]</th>
 							<td><span ng-hide="event.past">Upcoming</span><span ng-show="event.past">Past</span></td>
 							<td>[[event.date.string]]</td>
