@@ -22,7 +22,10 @@ var EventSchema = new mongoose.Schema({
 	schedule:[String],
 	registration:{
 		url:String,
-		date:Date
+		date:{
+			full:Date,
+			string:String
+		}
 	},
 	past:Boolean
 })

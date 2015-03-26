@@ -26,8 +26,8 @@
 							<td><span ng-hide="event.past">Upcoming</span><span ng-show="event.past">Past</span></td>
 							<td>[[event.date.string]]</td>
 							<td>[[event.location]]</td>
-							<td>Register by [[event.registration.date]]</td>
-							<td>[[event.sponsors]]</td>
+							<td><span ng-show="event.registration.date.string">Register by [[event.registration.date.string]]<span></td>
+							<td>[[event.sponsors.join(", ")]]</td>
 							<td><a href="/editEvent/[[event._id]]"><span class="glyphicon glyphicon-pencil"></span></a></td>
 							<td><p class="glyphicon glyphicon-trash" style="color:red;cursor:pointer" ng-click="deleteEvent([[event._id]])"></p></td>
 						</tr>

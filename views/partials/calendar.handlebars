@@ -6,6 +6,31 @@
 	<div class="row">
 		<div class="col-lg-12">
 			<div class="table-responsive">
+				<div class="modal fade" id="[[event._id]]" ng-repeat="event in internalEvents">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button class="close" data-dismiss="modal">&times;</button>
+
+								<h4 class="modal-title">[[event.name]]</h4>
+								<h5>Date: [[event.date.string]], Time: [[event.eventTime.string]]</h5>
+								<h5>Location: [[event.location]]</h5>
+								<h5 ng-show="event.capacity">Capacity: [[event.capacity]]</h5>
+								<h5 ng-show="event.price">Price: $[[event.price]]</h5> 
+							</div><!-- end modal header-->
+
+							<div class="modal-body">
+							<p ng-repeat="paragraph in event.description">[[paragraph]]</p> 
+							<p ng-repeat="paragraph in event.schedule">[[paragraph]]</p>
+
+							</div><!-- end modal body-->
+
+							<div class="modal-footer">
+								<button class="btn btn-success" type="button">Register for this Event</button> <button class="btn btn-primary" data-dismiss="modal" type="button">Close</button>
+							</div><!-- end modal-footer -->
+						</div><!-- end modal content -->
+					</div><!-- end modal dialog --> 
+				</div><!--end modal fade --> 
 				<table class="table table-hover">
 					<thead>
 					  <tr>
@@ -17,137 +42,47 @@
 					  </tr>
 					</thead>		
 					<tbody>
-						<tr>
-							<th scope="row"><a href="#myModal" data-toggle="modal">Example Event Name 1</a></th>
-							<!-- start Modal --> 
-							<div class="modal fade" id="myModal">
-								<div class="modal-dialog">
-									<div class="modal-content">
-										<div class="modal-header">
-											<button class="close" data-dismiss="modal">&times;</button>
-
-											<h4 class="modal-title">Example Event Name 1</h4>
-											<h5>Date, Time, Location</h5>
-										</div><!-- end modal header-->
-
-										<div class="modal-body">
-										<p> Event Description: Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. </p> 
-
-										</div><!-- end modal body-->
-
-										<div class="modal-footer">
-											<button class="btn btn-success" type="button">Register for this Event</button> <button class="btn btn-primary" data-dismiss="modal" type="button">Close</button>
-										</div><!-- end modal-footer -->
-									</div><!-- end modal content -->
-								</div><!-- end modal dialog --> 
-							</div><!--end modal fade --> 
-							<!-- end Modal --> 
-
-							<td>Mon March 16, 2015</td>
-							<td>525 Dentons, 25th Floor</td>
-							<td>Register by March 10, 2015</td>
-							<td>Consulate General of Vietnam, Asia Society North America</td>
-						</tr>
-						<tr>
-							<th scope="row"><a href="#myModal" data-toggle="modal">Example Event Name 2</a></th>
-							<!-- start Modal --> 
-							<div class="modal fade" id="myModal">
-								<div class="modal-dialog">
-									<div class="modal-content">
-										<div class="modal-header">
-											<button class="close" data-dismiss="modal">&times;</button>
-
-											<h4 class="modal-title">Example Event Name 2</h4>
-											<h5>Date, Time, Location</h5>
-										</div><!-- end modal header-->
-
-										<div class="modal-body">
-										<p> Event Description: Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. </p> 
-
-										</div><!-- end modal body-->
-
-										<div class="modal-footer">
-											<button class="btn btn-success" type="button"><a href="#">Register for this Event</a></button> <button class="btn btn-primary" data-dismiss="modal" type="button">Close</button>
-										</div><!-- end modal-footer -->
-									</div><!-- end modal content -->
-								</div><!-- end modal dialog --> 
-							</div><!--end modal fade --> 
-							<!-- end Modal --> 
-							<td>Mon March 16, 2015</td>
-							<td>525 Dentons, 25th Floor</td>
-							<td>Register by March 10, 2015</td>
-							<td>Consulate General of Vietnam, Asia Society North America</td>
-						</tr>
-						<tr>
-							<th scope="row"><a href="#myModal" data-toggle="modal">Example Event Name 3</a></th>
-							<!-- start Modal --> 
-							<div class="modal fade" id="myModal">
-								<div class="modal-dialog">
-									<div class="modal-content">
-										<div class="modal-header">
-											<button class="close" data-dismiss="modal">&times;</button>
-
-											<h4 class="modal-title">Example Event Name 3</h4>
-											<h5>Date, Time, Location</h5>
-										</div><!-- end modal header-->
-
-										<div class="modal-body">
-										<p> Event Description: Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. </p> 
-
-										</div><!-- end modal body-->
-
-										<div class="modal-footer">
-											<button class="btn btn-success" type="button"><a href="#">Register for this Event</a></button> <button class="btn btn-primary" data-dismiss="modal" type="button">Close</button>
-										</div><!-- end modal-footer -->
-									</div><!-- end modal content -->
-								</div><!-- end modal dialog --> 
-							</div><!--end modal fade --> 
-							<!-- end Modal --> 
-							<td>Mon March 16, 2015</td>
-							<td>525 Dentons, 25th Floor</td>
-							<td>Register by March 10, 2015</td>
-							<td>Consulate General of Vietnam, Asia Society North America</td>
-						</tr>
-						<tr>
-							<th scope="row"><a href="#myModal" data-toggle="modal">Example Event Name 4</a></th>
-							<!-- start Modal --> 
-							<div class="modal fade" id="myModal">
-								<div class="modal-dialog">
-									<div class="modal-content">
-										<div class="modal-header">
-											<button class="close" data-dismiss="modal">&times;</button>
-
-											<h4 class="modal-title">Example Event Name 4</h4>
-											<h5>Date, Time, Location</h5>
-										</div><!-- end modal header-->
-
-										<div class="modal-body">
-										<p> Event Description: Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. </p> 
-
-										</div><!-- end modal body-->
-
-										<div class="modal-footer">
-											<button class="btn btn-success" type="button"><a href="#">Register for this Event</a></button> <button class="btn btn-primary" data-dismiss="modal" type="button">Close</button>
-										</div><!-- end modal-footer -->
-									</div><!-- end modal content -->
-								</div><!-- end modal dialog --> 
-							</div><!--end modal fade --> 
-							<!-- end Modal --> 
-							<td>Mon March 16, 2015</td>
-							<td>525 Dentons, 25th Floor</td>
-							<td>Register by March 10, 2015</td>
-							<td>Consulate General of Vietnam, Asia Society North America</td>
+						<tr ng-repeat="event in internalEvents">
+							<th scope="row"><a ng-click="showModal([[event._id]])" data-toggle="modal">[[event.name]]</a></th>
+							<td>[[event.date.string]]</td>
+							<td>[[event.location]]</td>
+							<td><span ng-show="event.registration.date.string">Register by [[event.registration.date.string]]<span></td>
+							<td>[[event.sponsors.join(", ")]]</td>
 						</tr>
 					</tbody>
 				</table>
 			</div><!-- end div table-responsive -->
 		</div><!-- end col-lg-12 -->
 	</div><!-- end row --> 
-	
 	<p class="lead" style="padding-top:20px; text-align:center;">Featured International and Other Events</p>
 	<div class="row">
 		<div class="col-lg-12">
 			<div class="table-responsive">
+				<div class="modal fade" id="[[event._id]]" ng-repeat="event in externalEvents">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button class="close" data-dismiss="modal">&times;</button>
+
+								<h4 class="modal-title">[[event.name]]</h4>
+								<h5>Date: [[event.date.string]], Time: [[event.eventTime.string]]</h5>
+								<h5>Location: [[event.location]]</h5>
+								<h5 ng-show="event.capacity">Capacity: [[event.capacity]]</h5>
+								<h5 ng-show="event.price">Price: $[[event.price]]</h5> 
+							</div><!-- end modal header-->
+
+							<div class="modal-body">
+							<p ng-repeat="paragraph in event.description">[[paragraph]]</p> 
+							<p ng-repeat="paragraph in event.schedule">[[paragraph]]</p>
+
+							</div><!-- end modal body-->
+
+							<div class="modal-footer">
+								<button class="btn btn-success" type="button">Register for this Event</button> <button class="btn btn-primary" data-dismiss="modal" type="button">Close</button>
+							</div><!-- end modal-footer -->
+						</div><!-- end modal content -->
+					</div><!-- end modal dialog --> 
+				</div><!--end modal fade --> 
 				<table class="table table-hover">
 					<thead>
 					  <tr>
@@ -159,33 +94,12 @@
 					  </tr>
 					</thead>		
 					<tbody>
-						<tr>
-							<th scope="row"><a href="#">Example Event Name 1</a></th>
-							<td>Mon March 16, 2015</td>
-							<td>525 Dentons, 25th Floor</td>
-							<td>Register by March 10, 2015</td>
-							<td>Consulate General of Vietnam, Asia Society North America</td>
-						</tr>
-						<tr>
-							<th scope="row"><a href="#">Example Event Name 1</a></th>
-							<td>Mon March 16, 2015</td>
-							<td>525 Dentons, 25th Floor</td>
-							<td>Register by March 10, 2015</td>
-							<td>Consulate General of Vietnam, Asia Society North America</td>
-						</tr>
-						<tr>
-							<th scope="row"><a href="#">Example Event Name 1</a></th>
-							<td>Mon March 16, 2015</td>
-							<td>525 Dentons, 25th Floor</td>
-							<td>Register by March 10, 2015</td>
-							<td>Consulate General of Vietnam, Asia Society North America</td>
-						</tr>
-						<tr>
-							<th scope="row"><a href="#">Example Event Name 1</a></th>
-							<td>Mon March 16, 2015</td>
-							<td>525 Dentons, 25th Floor</td>
-							<td>Register by March 10, 2015</td>
-							<td>Consulate General of Vietnam, Asia Society North America</td>
+						<tr ng-repeat="event in externalEvents">
+							<th scope="row"><a ng-click="showModal([[event._id]])" data-toggle="modal">[[event.name]]</a></th>
+							<td>[[event.date.string]]</td>
+							<td>[[event.location]]</td>
+							<td><span ng-show="event.registration.date.string">Register by [[event.registration.date.string]]<span></td>
+							<td>[[event.sponsors]]</td>
 						</tr>
 					</tbody>
 				</table>

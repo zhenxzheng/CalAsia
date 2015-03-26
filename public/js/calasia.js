@@ -35,25 +35,44 @@ angular.module('calasia',['ngRoute'])
   		$interpolateProvider.endSymbol(']]');
 	}])
 	.controller("calendarCtrl",function ($scope, $http){
-		$http.get("/api/events").success(function(data, status, headers, config){
-			$scope.events = data;
+		$http.get("/api/internalEvents").success(function(data, status, headers, config){
+			if(data.length==0){
+				data.push({name:"No Upcoming Internal Events"});
+			}
+			$scope.internalEvents = data;
 		})
+		$http.get("/api/externalEvents").success(function(data, status, headers, config){
+			if(data.length==0){
+				data.push({name:"No Upcoming External Events"});
+			}
+			$scope.externalEvents = data;
+		})
+		$scope.showModal = function (id){
+			var selector = "#"+id;
+			$(selector).modal('show');
+		}
 	})
 	.controller("addEventCtrl",function ($scope, $http, $location){
 		$scope.form = {};
 		$scope.form.date = {};
 		$scope.form.eventTime = {};
 		$scope.form.registration = {};
+		$scope.form.registration.date = {}
 		(function(){
 		    $scope.form.date.full = new Date();
-		    $scope.form.registration.date = new Date();
+		    $scope.form.registration.date.full = new Date();
 		})();
 		$scope.submitEvent = function () {
 			$scope.form.eventType = $('input[name=eventType]:checked', 'form').val();
-			if($scope.form.date.full){
+			if($scope.form.date.full || $scope.form.registration.date.full){
 				var monthArr = ["January","February","March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 				var weekdayArr = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-				$scope.form.date.string = weekdayArr[$scope.form.date.full.getDay()] +", "+monthArr[$scope.form.date.full.getMonth()]+" "+$scope.form.date.full.getDate()+", "+$scope.form.date.full.getFullYear();
+				if($scope.form.date.full){
+					$scope.form.date.string = weekdayArr[$scope.form.date.full.getDay()] +", "+monthArr[$scope.form.date.full.getMonth()]+" "+$scope.form.date.full.getDate()+", "+$scope.form.date.full.getFullYear();
+				}
+				if($scope.form.registration.date.full){
+					$scope.form.registration.date.string = weekdayArr[$scope.form.registration.date.full.getDay()] +", "+monthArr[$scope.form.registration.date.full.getMonth()]+" "+$scope.form.registration.date.full.getDate()+", "+$scope.form.registration.date.full.getFullYear();	
+				}
 			}
 			if($scope.form.images!=undefined) $scope.form.images = $scope.form.images.split(/, */);
 			if($scope.form.speakers!=undefined) $scope.form.speakers = $scope.form.speakers.split(/, */);
@@ -87,6 +106,7 @@ angular.module('calasia',['ngRoute'])
 		$scope.form.date = {};
 		$scope.form.eventTime = {};
 		$scope.form.registration = {};
+		$scope.form.registration.date = {};
 		$http.get('/api/event/' + $routeParams.id).
 		success(function(data) {
 			$scope.form = data.event;
@@ -99,17 +119,22 @@ angular.module('calasia',['ngRoute'])
 			else $scope.form.date = {};
 			if($scope.form.eventTime != undefined) $scope.form.eventTime.full = new Date($scope.form.eventTime.full);
 			else $scope.form.eventTime = {};
-			if($scope.form.registration !=undefined) $scope.form.registration.date = new Date($scope.form.registration.date);
+			if($scope.form.registration !=undefined) $scope.form.registration.date.full = new Date($scope.form.registration.date.full);
 			else $scope.form.registration = {};
 			$(':radio[value='+$scope.form.eventType+']').attr('checked',true);
 		});
 
 		$scope.submitEvent = function () {
 			$scope.form.eventType = $('input[name=eventType]:checked', 'form').val();
-			if($scope.form.date.full){
+			if($scope.form.date.full || $scope.form.registration.date.full){
 				var monthArr = ["January","February","March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 				var weekdayArr = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-				$scope.form.date.string = weekdayArr[$scope.form.date.full.getDay()] +", "+monthArr[$scope.form.date.full.getMonth()]+" "+$scope.form.date.full.getDate()+", "+$scope.form.date.full.getFullYear();
+				if($scope.form.date.full){
+					$scope.form.date.string = weekdayArr[$scope.form.date.full.getDay()] +", "+monthArr[$scope.form.date.full.getMonth()]+" "+$scope.form.date.full.getDate()+", "+$scope.form.date.full.getFullYear();
+				}
+				if($scope.form.registration.date.full){
+					$scope.form.registration.date.string = weekdayArr[$scope.form.registration.date.full.getDay()] +", "+monthArr[$scope.form.registration.date.full.getMonth()]+" "+$scope.form.registration.date.full.getDate()+", "+$scope.form.registration.date.full.getFullYear();	
+				}
 			}
 			if($scope.form.images!=undefined) $scope.form.images = $scope.form.images.split(/, */);
 			if($scope.form.speakers!=undefined) $scope.form.speakers = $scope.form.speakers.split(/, */);
@@ -139,15 +164,9 @@ angular.module('calasia',['ngRoute'])
 	})
 	.controller("adminCtrl", function ($scope, $http, $timeout){
 		$http.get('/api/events').success(function(data, status, headers, config){
-			var monthArr = ["January","February","March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-			var weekdayArr = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+			console.log(data);
 			$scope.events = data;
 			$scope.count = $scope.events.length;
-			$scope.events.forEach(function(item, i){
-				item.sponsors = item.sponsors.join(", ");
-				item.registration.date = new Date(item.registration.date);
-				item.registration.date = weekdayArr[item.registration.date.getDay()] +", "+monthArr[item.registration.date.getMonth()]+" "+item.registration.date.getDate()+", "+item.registration.date.getFullYear()
-			})
 		})
 		$scope.deleteEvent = function(id){
 		    var current = "#"+id;
