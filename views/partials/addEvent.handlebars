@@ -8,16 +8,18 @@
     <h4> Type of Event: </h4>
     <div class="radio">
       <label>
-        <input type="radio" name="eventType" id="optionsRadios1" value="internal" checked>
+        <input type="radio" name="eventType" id="internal" value="internal" checked>
         Internal
       </label>
     </div>
     <div class="radio">
       <label>
-        <input type="radio" name="eventType" id="optionsRadios2" value="external">
+        <input type="radio" name="eventType" id="external" value="external">
         External
       </label>
     </div>
+      External Link: 
+      <input id="externalLink" class="form-control" placeholder="www.example.com/register" ng-model="form.externalLink">
     <h4> Event Name:</h4>
     <input class="form-control" ng-model="form.name" style="width:100%" placeholder="Cal-Asian Event">
   </div>

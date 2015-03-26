@@ -26,7 +26,13 @@
 							</div><!-- end modal body-->
 
 							<div class="modal-footer">
-								<button class="btn btn-success" type="button">Register for this Event</button> <button class="btn btn-primary" data-dismiss="modal" type="button">Close</button>
+								<button ng-show="event.externalLink" class="btn btn-default" type="button">
+										<a href="[[event.externalLink]]" target="_blank">
+											More Details <span class="glyphicon glyphicon-new-window"></span>
+										</a>
+									</button>
+								<button class="btn btn-success" type="button">Register for this Event</button>
+								<button class="btn btn-primary" data-dismiss="modal" type="button">Close</button>
 							</div><!-- end modal-footer -->
 						</div><!-- end modal content -->
 					</div><!-- end modal dialog --> 

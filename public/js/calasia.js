@@ -6,7 +6,8 @@ angular.module('calasia',['ngRoute'])
 				templateUrl: 'partials/home'
 			})
 			.when('/programs',{
-				templateUrl: 'partials/programs'
+				templateUrl: 'partials/programs',
+				controller:"programsCtrl"
 			})
 			.when('/calendar',{
 				templateUrl: 'partials/calendar',
@@ -34,14 +35,34 @@ angular.module('calasia',['ngRoute'])
 		$interpolateProvider.startSymbol('[[');
   		$interpolateProvider.endSymbol(']]');
 	}])
+	.controller("programsCtrl",function ($scope, $http, $routeParams){
+		$http.get("/api/events").success(function(data, status, headers, config){
+			if(data.length==0){
+				data.push({name:"No Events"});
+			}
+			$scope.events = data;
+		})
+		$scope.filterYear = function (year){
+			$http.get("/api/events/"+year).success(function(data, status, headers, config){
+				if(data.length==0){
+					data.push({name:"No Events in "+year});
+				}
+				$scope.events = data;
+			})
+		}
+		$scope.showModal = function (id){
+			var selector = "#"+id;
+			$(selector).modal('show');
+		}
+	})
 	.controller("calendarCtrl",function ($scope, $http){
-		$http.get("/api/internalEvents").success(function(data, status, headers, config){
+		$http.get("/api/upcomingInternalEvents").success(function(data, status, headers, config){
 			if(data.length==0){
 				data.push({name:"No Upcoming Internal Events"});
 			}
 			$scope.internalEvents = data;
 		})
-		$http.get("/api/externalEvents").success(function(data, status, headers, config){
+		$http.get("/api/upcomingExternalEvents").success(function(data, status, headers, config){
 			if(data.length==0){
 				data.push({name:"No Upcoming External Events"});
 			}
@@ -57,18 +78,28 @@ angular.module('calasia',['ngRoute'])
 		$scope.form.date = {};
 		$scope.form.eventTime = {};
 		$scope.form.registration = {};
-		$scope.form.registration.date = {}
+		$scope.form.registration.date = {};
+		if($('#external').prop('checked') == true) $('#externalLink').prop('disabled', false);
+	    else $('#externalLink').prop('disabled', true);
 		(function(){
 		    $scope.form.date.full = new Date();
 		    $scope.form.registration.date.full = new Date();
 		})();
+		$('#internal, #external').click(function(){
+			if($('#external').prop('checked') == true) $('#externalLink').prop('disabled', false);
+		    else $('#externalLink').prop('disabled', true);
+		})
 		$scope.submitEvent = function () {
 			$scope.form.eventType = $('input[name=eventType]:checked', 'form').val();
+			if ($scope.form.eventType == "internal"){
+				$scope.form.externalLink = "";
+			}
 			if($scope.form.date.full || $scope.form.registration.date.full){
 				var monthArr = ["January","February","March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 				var weekdayArr = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 				if($scope.form.date.full){
 					$scope.form.date.string = weekdayArr[$scope.form.date.full.getDay()] +", "+monthArr[$scope.form.date.full.getMonth()]+" "+$scope.form.date.full.getDate()+", "+$scope.form.date.full.getFullYear();
+					$scope.form.year = $scope.form.date.full.getFullYear();
 				}
 				if($scope.form.registration.date.full){
 					$scope.form.registration.date.string = weekdayArr[$scope.form.registration.date.full.getDay()] +", "+monthArr[$scope.form.registration.date.full.getMonth()]+" "+$scope.form.registration.date.full.getDate()+", "+$scope.form.registration.date.full.getFullYear();	
@@ -102,6 +133,10 @@ angular.module('calasia',['ngRoute'])
 		};
 	})
 	.controller("editEventCtrl", function ($scope, $http, $location, $routeParams){
+		$('#internal, #external').click(function(){
+			if($('#external').prop('checked') == true) $('#externalLink').prop('disabled', false);
+		    else $('#externalLink').prop('disabled', true);
+		})
 		$scope.form = {};
 		$scope.form.date = {};
 		$scope.form.eventTime = {};
@@ -121,16 +156,23 @@ angular.module('calasia',['ngRoute'])
 			else $scope.form.eventTime = {};
 			if($scope.form.registration !=undefined) $scope.form.registration.date.full = new Date($scope.form.registration.date.full);
 			else $scope.form.registration = {};
-			$(':radio[value='+$scope.form.eventType+']').attr('checked',true);
+			$(':radio[value='+$scope.form.eventType+']').prop('checked',true);
+			if($('#external').prop('checked') == true) $('#externalLink').prop('disabled', false);
+	    	else $('#externalLink').prop('disabled', true);
+	    	console.log($scope.form.eventType == "internal")
 		});
-
+		
 		$scope.submitEvent = function () {
 			$scope.form.eventType = $('input[name=eventType]:checked', 'form').val();
+			if ($scope.form.eventType == "internal"){
+				$scope.form.externalLink = "";
+			}
 			if($scope.form.date.full || $scope.form.registration.date.full){
 				var monthArr = ["January","February","March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 				var weekdayArr = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 				if($scope.form.date.full){
 					$scope.form.date.string = weekdayArr[$scope.form.date.full.getDay()] +", "+monthArr[$scope.form.date.full.getMonth()]+" "+$scope.form.date.full.getDate()+", "+$scope.form.date.full.getFullYear();
+					$scope.form.year = $scope.form.date.full.getFullYear();
 				}
 				if($scope.form.registration.date.full){
 					$scope.form.registration.date.string = weekdayArr[$scope.form.registration.date.full.getDay()] +", "+monthArr[$scope.form.registration.date.full.getMonth()]+" "+$scope.form.registration.date.full.getDate()+", "+$scope.form.registration.date.full.getFullYear();	

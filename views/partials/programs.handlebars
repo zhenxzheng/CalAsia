@@ -53,21 +53,21 @@
 			<div class="col-md-12">
 				<ol class="breadcrumb">
 				  <li>Past events and speakers</li>
-				  <li class="active"><a href="#">2015</a></li>
-				  <li><a href="#">2014</a></li>
-				  <li><a href="#">2013</a></li>
-				  <li><a href="#">2012</a></li>
-				  <li><a href="#">2011</a></li>
-				  <li><a href="#">2010</a></li>
-				  <li><a href="#">2009</a></li>
-				  <li><a href="#">2008</a></li>
-				  <li><a href="#">2007</a></li>
-				  <li><a href="#">2006</a></li>
-				  <li><a href="#">2005</a></li>
-				  <li><a href="#">2004</a></li>
-				  <li><a href="#">2003</a></li>
-				  <li><a href="#">2002</a></li>
-				  <li><a href="#">2001</a></li>
+				  <li><a ng-click="filterYear(2015)">2015</a></li>
+				  <li><a ng-click="filterYear(2014)">2014</a></li>
+				  <li><a ng-click="filterYear(2013)">2013</a></li>
+				  <li><a ng-click="filterYear(2012)">2012</a></li>
+				  <li><a ng-click="filterYear(2011)">2011</a></li>
+				  <li><a ng-click="filterYear(2010)">2010</a></li>
+				  <li><a ng-click="filterYear(2009)">2009</a></li>
+				  <li><a ng-click="filterYear(2008)">2008</a></li>
+				  <li><a ng-click="filterYear(2007)"2007</a></li>
+				  <li><a ng-click="filterYear(2006)">2006</a></li>
+				  <li><a ng-click="filterYear(2005)">2005</a></li>
+				  <li><a ng-click="filterYear(2004)">2004</a></li>
+				  <li><a ng-click="filterYear(2003)">2003</a></li>
+				  <li><a ng-click="filterYear(2002)">2002</a></li>
+				  <li><a ng-click="filterYear(2001)">2001</a></li>
 				</ol>	
 			</div><!-- end col-lg-12 -->
 		</div><!-- end row -->
@@ -76,8 +76,38 @@
 		<div class="row">
 			<div class="col-md-12">
 				<div class="table-responsive">
-					<table class="table table-hover">
+					<div class="modal fade" id="[[event._id]]" ng-repeat="event in events">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header">
+									<button class="close" data-dismiss="modal">&times;</button>
 
+									<h4 class="modal-title">[[event.name]]</h4>
+									<h5>Date: [[event.date.string]], Time: [[event.eventTime.string]]</h5>
+									<h5>Location: [[event.location]]</h5>
+									<h5 ng-show="event.capacity">Capacity: [[event.capacity]]</h5>
+									<h5 ng-show="event.price">Price: $[[event.price]]</h5> 
+								</div><!-- end modal header-->
+
+								<div class="modal-body">
+								<p ng-repeat="paragraph in event.description">[[paragraph]]</p> 
+								<p ng-repeat="paragraph in event.schedule">[[paragraph]]</p>
+
+								</div><!-- end modal body-->
+
+								<div class="modal-footer">
+									<button ng-show="event.externalLink" class="btn btn-default" type="button">
+										<a href="[[event.externalLink]]" target="_blank">
+											More Details <span class="glyphicon glyphicon-new-window"></span>
+										</a>
+									</button> 
+									<button class="btn btn-success" type="button">Register for this Event</button> 
+									<button class="btn btn-primary" data-dismiss="modal" type="button">Close</button>
+								</div><!-- end modal-footer -->
+							</div><!-- end modal content -->
+						</div><!-- end modal dialog --> 
+					</div><!--end modal fade --> 
+					<table class="table table-hover">
 						<thead>
 						  <tr>
 						  	<th class="col-sm-4">Event Name</th>
@@ -86,191 +116,14 @@
 						  	<th class="col-sm-4">Sponsors and Supporters</th>	
 						  </tr>
 						</thead>
-
 						<tbody>
-
 							<!-- start 2014 Event 1/12 -->
-							<tr>
-								<th scope="row"><a href="#myModal" data-toggle="modal">Breakfast with Singapore Ambassador HE Ashok Kumar Mirpuri</a></th>
-								
-								<!-- start Modal --> 
-								<div class="modal fade" id="myModal">
-									<div class="modal-dialog">
-										<div class="modal-content">
-											<div class="modal-header">
-												<button class="close" data-dismiss="modal">&times;</button>
-
-												<h4 class="modal-title">Example Event Name 1</h4>
-												<h5>Date, Time, Location</h5>
-											</div><!-- end modal header-->
-
-											<div class="modal-body">
-											<p> Event Description: Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. </p> 
-
-											</div><!-- end modal body-->
-
-											<div class="modal-footer">
-												<button class="btn btn-success" type="button">Register for this Event</button> <button class="btn btn-primary" data-dismiss="modal" type="button">Close</button>
-											</div><!-- end modal-footer -->
-										</div><!-- end modal content -->
-									</div><!-- end modal dialog --> 
-								</div><!--end modal fade --> 
-								<!-- end Modal --> 
-
-								<td>October 16, 2014</td>
-								<td>HE Ashok Kumar Mirpuri</td>
-								<td>Consulate General of Singapore, US Commercial Service, US Small Business Administration</td>
+							<tr ng-repeat="event in events">
+								<th scope="row"><a ng-click="showModal([[event._id]])" data-toggle="modal">[[event.name]]</a></th>
+								<td>[[event.date.string]]</td>
+								<td>[[event.speakers.join(", ")]]</td>
+								<td>[[event.sponsors.join(", ")]]</td>
 							</tr>
-							<!-- end 2014 Event 1/12 --> 
-
-							<!-- start 2014 Event 2/12 -->
-							<tr>
-								<th scope="row"><a href="http://www.frbsf.org/banking-supervision/programs/asia-program/events/2014/october/demystifying-china/" target="_blank">Asia Financial Forum: "Demystifying China" by Federal Reserve Bank of San Francisco</a></th>
-
-								<td>October 16, 2014</td>
-								<td>Andy Rothman, Matthews International Capital Management</td>
-								<td>Cal-Asia, Financial Women of San Francisco</td>
-							</tr>
-							<!-- end 2014 Event 2/12 -->
-
-							<!-- start 2014 Event 3/12 -->
-							<tr>
-								<th scope="row"><a href="#myModal" data-toggle="modal">Cal-Asia Breakfast Roundtable Series: Honorable Han Dong-man, Consul General of Korea</a></th>
-								
-								<!-- start Modal --> 
-								<div class="modal fade" id="myModal">
-									<div class="modal-dialog">
-										<div class="modal-content">
-											<div class="modal-header">
-												<button class="close" data-dismiss="modal">&times;</button>
-
-												<h4 class="modal-title">Example Event Name 1</h4>
-												<h5>Date, Time, Location</h5>
-											</div><!-- end modal header-->
-
-											<div class="modal-body">
-											<p> Event Description: Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. </p> 
-
-											</div><!-- end modal body-->
-
-											<div class="modal-footer">
-												<button class="btn btn-success" type="button">Register for this Event</button> <button class="btn btn-primary" data-dismiss="modal" type="button">Close</button>
-											</div><!-- end modal-footer -->
-										</div><!-- end modal content -->
-									</div><!-- end modal dialog --> 
-								</div><!--end modal fade --> 
-								<!-- end Modal --> 
-
-								<td>September 16, 2014</td>
-								<td>Hon. Han Dong-man</td>
-								<td>US Commercial Service, Dentons LLP (Host)</td>
-							</tr>
-							<!-- end 2014 Event 3/12 -->
-
-							<!-- start 2014 Event 4/12 -->
-							<tr>
-								<th scope="row"><a href="http://www.ustda.gov/news/events/2014/SouthAsia/Vietnam/VietnamAirportDevelopmentOperationsRTM.asp" target="_blank">USTDA Vietnam Airport Development and Operations  Reverse Trade Mission: Reception</a></th>
-								
-								<td>July 29, 2014</td>
-								<td>Delegation of key officials from Vietnam's Ministry of Transport, Airports Corporation of Vietnam, and the Civil Aviation Administration of Vietnam (CAAV)</td>
-								<td>Cal-Asia, US Trade Development Agency (USTDA) US Commercial Service SF, Squire Patton Boggs LLP (Host)</td>
-							</tr>
-							<!-- end 2014 Event 4/12 --> 
-
-							<!-- start 2014 Event 5/12 -->
-							<tr>
-								<th scope="row"><a href="#myModal" data-toggle="modal">Breakfast Briefing: Japan Trade & Investment</a></th>
-								
-								<!-- start Modal --> 
-								<div class="modal fade" id="myModal">
-									<div class="modal-dialog">
-										<div class="modal-content">
-											<div class="modal-header">
-												<button class="close" data-dismiss="modal">&times;</button>
-
-												<h4 class="modal-title">Example Event Name 1</h4>
-												<h5>Date, Time, Location</h5>
-											</div><!-- end modal header-->
-
-											<div class="modal-body">
-											<p> Event Description: US Embassy Tokyo Deputy Chief of Mission Kurt Tong and Senior Commercial Officer Andrew Wylegala led breakfast briefing on doing business in Japan. Panelists from Nikolas Weinstein Studios (Emily Vassos), SRI (Robert Pearlstein) and Vigilent (Jim Rynne). Organized by DHL, US Commercial Service SF; sponsored by California-Asia Business Council, hosted by Dentons; cosponsors JETRO and Japan Society of Northern California. </p> 
-
-											</div><!-- end modal body-->
-
-											<div class="modal-footer">
-												<button class="btn btn-success" type="button">Register for this Event</button> <button class="btn btn-primary" data-dismiss="modal" type="button">Close</button>
-											</div><!-- end modal-footer -->
-										</div><!-- end modal content -->
-									</div><!-- end modal dialog --> 
-								</div><!--end modal fade --> 
-								<!-- end Modal --> 
-
-								<td>May 19, 2014</td>
-								<td>US Embassy Tokyo Deputy Chief of Mission Kurt Tong; Senior Commercial Officer Andrew Wylegalam;  Emily Vassos (Nikolas Weinstein Studios); Robert Pearlstein (SRI); Jim Rynne (Vigilent)  </td>
-								<td>Organized by DHL, US Commercial Service SF; sponsored by California-Asia Business Council, hosted by Dentons; cosponsors JETRO and Japan Society of Northern California.</td>
-							</tr>
-							<!-- end 2014 Event 5/12 -->
-
-							<!-- start 2014 Event 6/12 -->
-							<tr>
-								<th scope="row"><a href="www.calasia.org/events/14-4-24April_ADB_Flyerv2.pdf" target="_blank">Luncheon with Asian Development Bank Vice President Stephen Groff</a></th>
-
-								<td>April 24, 2014</td>
-								<td>Asian Development Bank Vice President, Stephen Groff</td>
-								<td>Squire Sanders LLP (Host)</td>
-							</tr>
-							<!-- end 2014 Event 6/12 -->
-
-							<!-- start 2014 Event 7/12 -->
-							<tr>
-								<th scope="row"><a href="#" target="_blank">Silicon Valley US Commercial Speed Meetings with USFCS specialists from Southeast Asia</a></th>
-
-								<td>April 11, 2014</td>
-								<td>-</td>
-								<td>-</td>
-							</tr>
-							<!-- end 2014 Event 7/12 -->   
-
-							<!-- start 2014 Event 8/12 -->
-							<tr>
-								<th scope="row"><a href="#" target="_blank">Webinar: Chinese Energy Efficiency Market</a></th>
-
-								<td>April 8, 2014</td>
-								<td>-</td>
-								<td>US Commercial Service, China-US Energy Efficiency Council</td>
-							</tr>
-							<!-- end 2014 Event 8/12 -->
-
-							<!-- start 2014 Event 9/12 -->
-							<tr>
-								<th scope="row"><a href="#" target="_blank">Asia Pacific Business Outlook Conference (APBO)</a></th>
-
-								<td>April 7-8, 2014</td>
-								<td>-</td>
-								<td>-</td>
-							</tr>
-							<!-- end 2014 Event 9/12 -->
-
-							<!-- start 2014 Event 10/12 -->
-							<tr>
-								<th scope="row"><a href="http://asiasociety.org/files/China_Hi_Tech_Report.pdf" target="_blank">Asia Society's Launch of China's High Tech Surge: Investing in America and Innovation</a></th>
-
-								<td>April 1, 2014</td>
-								<td>-</td>
-								<td>-</td>
-							</tr>
-							<!-- end 2014 Event 10/12 -->
-
-							<!-- start 2014 Event 10/12 -->
-							<tr>
-								<th scope="row"><a href="#" target="_blank">Cal-Asia Breakfast Roundtable Series: Hon. Chris Cheang, Consul General of Singapore </a></th>
-
-								<td>April 7-8, 2014</td>
-								<td>Christopher Cheang, Consul General of Singapore</td>
-								<td>-</td>
-							</tr>
-							<!-- end 2014 Event 10/12 -->  
-
 						</tbody>
 					</table>
 				</div><!-- end table-responsive --> 

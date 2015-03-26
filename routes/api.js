@@ -7,14 +7,6 @@ exports.events = function(req, res){
 		.sort('-date.full')
 		.exec(renderEvents);
 	function renderEvents (err, events){
-		if(err) console.log(err);
-		events.forEach(function(item, i){
-			item.registration.date = {full:new Date(),string:"String"};
-			item.save(function(err){
-				if(err) res.send(500);
-			})
-		})
-		console.log(events);
 		res.json(events);
 	}
 }
@@ -62,8 +54,42 @@ exports.pastEvents = function(req, res){
 		res.json(events);
 	}
 }
+exports.upcomingExternalEvents = function (req, res){
+	checkPastEvents();
+	models.Event
+		.find({eventType:'external',past:false})
+		.sort('-date.full')
+		.exec(renderEvents);
+	function renderEvents (err, events){
+		if(err) console.log(err);
+		console.log(events);
+		res.json(events);
+	}
+}
+exports.upcomingInternalEvents = function (req, res){
+	checkPastEvents();
+	models.Event
+		.find({eventType:'internal',past:false})
+		.sort('-date.full')
+		.exec(renderEvents);
+	function renderEvents (err, events){
+		if(err) console.log(err);
+		console.log(events);
+		res.json(events);
+	}
+}
+exports.yearEvents = function (req, res){
+	var year = req.params.year;
+	models.Event
+		.find({'year':year})
+		.exec(callback);
+	function callback(err,events){
+		if(err) console.log(err);
+		res.json(events);
+    }
+}
 exports.oneEvent=function(req,res){
-	var id = req.params.id
+	var id = req.params.id;
 	models.Event
 		.findOne({'_id':id})
 		.exec(callback);
@@ -104,6 +130,7 @@ exports.editEvent = function (req, res){
 	    if(!result) res.json(false);
 	    else{
 	    	result.eventType = req.body.eventType;
+	    	result.externalLink = req.body.externalLink;
 			result.name = req.body.name;
 			result.date.full = req.body.date.full;
 			result.date.string = req.body.date.string;
@@ -121,6 +148,7 @@ exports.editEvent = function (req, res){
 			result.registration.url = req.body.registration.url;
 			result.registration.date.full = req.body.registration.date.full;
 			result.registration.date.string = req.body.registration.date.string;
+			result.year = req.body.year;
 			result.past = req.body.past;
 			result.save(function(err){
 				if(err) res.send(500);

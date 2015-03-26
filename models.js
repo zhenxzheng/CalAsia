@@ -2,6 +2,7 @@ var mongoose = require('mongoose');
 
 var EventSchema = new mongoose.Schema({
 	eventType:String,
+	externalLink:String,
 	name:String,//
 	date:{//
 		full:Date,
@@ -27,6 +28,7 @@ var EventSchema = new mongoose.Schema({
 			string:String
 		}
 	},
+	year:Number,
 	past:Boolean
 })
 exports.Event = mongoose.model('Event',EventSchema);
