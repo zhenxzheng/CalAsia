@@ -84,17 +84,23 @@ angular.module('calasia',['ngRoute'])
 	})
 	.controller("editEventCtrl", function ($scope, $http, $location, $routeParams){
 		$scope.form = {};
+		$scope.form.date = {};
+		$scope.form.eventTime = {};
+		$scope.form.registration = {};
 		$http.get('/api/event/' + $routeParams.id).
 		success(function(data) {
 			$scope.form = data.event;
-			$scope.form.description = $scope.form.description.join("\r\r");
-			$scope.form.schedule = $scope.form.schedule.join("\r\r");
+			if($scope.form.description != undefined) $scope.form.description = $scope.form.description.join("\r\r");
+			if($scope.form.schedule != undefined) $scope.form.schedule = $scope.form.schedule.join("\r\r");
 			if($scope.form.speakers!=undefined) $scope.form.speakers = $scope.form.speakers.join(", ");
 			if($scope.form.sponsors!=undefined) $scope.form.sponsors = $scope.form.sponsors.join(", ");
 			if($scope.form.image!=undefined) $scope.form.image = $scope.form.image.join(", ");
-			if ($scope.form.date != undefined) $scope.form.date.full = new Date($scope.form.date.full);
-			if ($scope.form.eventTime != undefined) $scope.form.eventTime.full = new Date($scope.form.eventTime.full);
-			if ($scope.form.registration != undefined) $scope.form.registration.date = new Date($scope.form.registration.date);
+			if($scope.form.date != undefined) $scope.form.date.full = new Date($scope.form.date.full);
+			else $scope.form.date = {};
+			if($scope.form.eventTime != undefined) $scope.form.eventTime.full = new Date($scope.form.eventTime.full);
+			else $scope.form.eventTime = {};
+			if($scope.form.registration !=undefined) $scope.form.registration.date = new Date($scope.form.registration.date);
+			else $scope.form.registration = {};
 			$(':radio[value='+$scope.form.eventType+']').attr('checked',true);
 		});
 
