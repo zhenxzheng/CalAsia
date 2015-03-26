@@ -92,9 +92,9 @@ angular.module('calasia',['ngRoute'])
 			if($scope.form.speakers!=undefined) $scope.form.speakers = $scope.form.speakers.join(", ");
 			if($scope.form.sponsors!=undefined) $scope.form.sponsors = $scope.form.sponsors.join(", ");
 			if($scope.form.image!=undefined) $scope.form.image = $scope.form.image.join(", ");
-			$scope.form.date.full = new Date($scope.form.date.full);
-			$scope.form.eventTime.full = new Date($scope.form.eventTime.full);
-			$scope.form.registration.date = new Date($scope.form.registration.date);
+			if ($scope.form.date.full) $scope.form.date.full = new Date($scope.form.date.full);
+			if ($scope.form.eventTime.full) $scope.form.eventTime.full = new Date($scope.form.eventTime.full);
+			if ($scope.form.registration.date) $scope.form.registration.date = new Date($scope.form.registration.date);
 			$(':radio[value='+$scope.form.eventType+']').attr('checked',true);
 		});
 
