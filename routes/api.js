@@ -8,6 +8,35 @@ exports.events = function(req, res){
 		.exec(renderEvents);
 	function renderEvents (err, events){
 		if(err) console.log(err);
+		events.forEach(function(item, i){
+			item.registration.date = {full:new Date(),string:"String"};
+			item.save(function(err){
+				if(err) res.send(500);
+			})
+		})
+		console.log(events);
+		res.json(events);
+	}
+}
+exports.internalEvents = function (req, res){
+	checkPastEvents();
+	models.Event
+		.find({eventType:'internal'})
+		.sort('-date.full')
+		.exec(renderEvents);
+	function renderEvents (err, events){
+		if(err) console.log(err);
+		res.json(events);
+	}
+}
+exports.externalEvents = function (req, res){
+	checkPastEvents();
+	models.Event
+		.find({eventType:'external'})
+		.sort('-date.full')
+		.exec(renderEvents);
+	function renderEvents (err, events){
+		if(err) console.log(err);
 		res.json(events);
 	}
 }
@@ -90,7 +119,8 @@ exports.editEvent = function (req, res){
 			result.regLink = req.body.regLink;
 			result.schedule = req.body.schedule;
 			result.registration.url = req.body.registration.url;
-			result.registration.date = req.body.registration.date;
+			result.registration.date.full = req.body.registration.date.full;
+			result.registration.date.string = req.body.registration.date.string;
 			result.past = req.body.past;
 			result.save(function(err){
 				if(err) res.send(500);
