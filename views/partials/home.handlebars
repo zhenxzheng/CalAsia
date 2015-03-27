@@ -43,58 +43,48 @@
 <!-- Under Caroursel -->
 <div id="under-carousel">
   <div class="row" id="wrapper">
-      <div class="col-md-8" id="leftColumn">
-        <div id="About" style="padding: 10px 0 30px 0; margin: 20px; border-bottom: solid 1px #4d4344;">
-          <h4> About Our Work</h4>
-          <p style="padding: 0 30px;"> California-Asia Business Council (Cal-Asia) is one of California's leading private-sector, non-profit, international business-promotion associations. Our mission is to help California firms of all sizes develop or expand their commercial ties with the economies of Pacific Asia and India. Cal-Asia members range from some of the nation's largest multinational companies to small and medium-sized exporters, importers, manufacturers, and service companies. Industries represented range from infrastructure development to technology, and also export-import, resource development, global transportation, engineering and design, banking and finance. </p> 
-        </div><!-- end About -->
+    <div class="col-md-8" id="leftColumn">
+      <div id="About" style="padding: 10px 0 30px 0; margin: 20px; border-bottom: solid 1px #4d4344;">
+        <h4> About Our Work</h4>
+        <p style="padding: 0 30px;"> California-Asia Business Council (Cal-Asia) is one of California's leading private-sector, non-profit, international business-promotion associations. Our mission is to help California firms of all sizes develop or expand their commercial ties with the economies of Pacific Asia and India. Cal-Asia members range from some of the nation's largest multinational companies to small and medium-sized exporters, importers, manufacturers, and service companies. Industries represented range from infrastructure development to technology, and also export-import, resource development, global transportation, engineering and design, banking and finance. </p> 
+      </div><!-- end About -->
 
-        <div id="Events" style="padding: 0px 0 30px 0; margin: 20px;">
-          <h4><span class="glyphicon glyphicon-calendar"> </span> Upcoming Cal-Asia and Partner Events</h4>
-          <p style="padding: 0 30px;">
-            Event 1<br> 
-            Description<br>
-            <a href="#">Details</a> | <a href="#">Registration</a><br>
-          </p>
+      <div id="Events" style="padding: 0px 0 30px 0; margin: 20px;">
+        <h4><span class="glyphicon glyphicon-calendar"> </span> Upcoming Cal-Asia and Partner Events</h4>
+        <p style="padding: 0 30px;" ng-repeat="event in upcomingEvents">
+          [[event.name]]<br> 
+          <span ng-show="event.description">
+          [[event.description[0].substring(0,50)]]...
+          <br>
+          <span ng-show="event.past">
+          <a href="#">Details</a> | <a href="[[event.registration.url]]">Registration</a>
+          </span>
+        </p>
+      </div><!-- end Events -->   
+    </div><!-- end left column --> 
 
-          <p style="padding: 0 30px;">
-            Event 2<br>
-            Description<br>
-            <a href="#">Details</a> | <a href="#">Registration</a><br>
-          </p>
+    <div class="col-md-4" id="rightColumn">
 
-          <p style="padding: 0 30px;">
-            Event 3<br>
-            Description<br>
-            <a href="#">Details</a> | <a href="#">Registration</a><br>
-          </p>
-        </div><!-- end Events -->   
-      </div><!-- end left column --> 
-
-     <div class="col-md-4" id="rightColumn">
-      
       <div id="NewsUpdates" style="padding: 0px 0 20px 0; margin: 20px;"> 
         <h4><span class="glyphicon glyphicon-asterisk"></span> News and Updates</h4>
         <p style="padding: 0 30px;">
-            Update 1<br> 
-            Description<br>
-            <a href="#">Read More >></a><br>
-          </p>
+          Update 1<br> 
+          Description<br>
+          <a href="#">Read More >></a><br>
+        </p>
 
-          <p style="padding: 0 30px;">
-            Update 2<br>
-            Description<br>
-            <a href="#">Read More >></a><br>
-          </p>
+        <p style="padding: 0 30px;">
+          Update 2<br>
+          Description<br>
+          <a href="#">Read More >></a><br>
+        </p>
       </div><!-- end NewsUpdates -->
 
       <div id="Twitter" style="padding: 0px 0 20px 0; margin: 20px;">
 
-      <a class="twitter-timeline"  href="https://twitter.com/calasiaorg"  data-widget-id="449677084760104961">Cal-Asia Insights on Twitter</a>
-                              <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script> 
-     </div><!-- end col-md-4 -->
+        <a class="twitter-timeline"  href="https://twitter.com/calasiaorg"  data-widget-id="449677084760104961">Cal-Asia Insights on Twitter</a>
+        <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+      </div><!-- end twitter -->
+    </div><!-- end col-md-4 -->
   </div><!-- end row wrapper--> 
-
-
-
 </div><!-- end container under carousel-->

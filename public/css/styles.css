@@ -11,7 +11,7 @@ Notes:	 Hand coded for California-Asia Business Council (Cal-Asia)
 
 
 /* --------------------------------------
-   Layout
+   Layout Components
    -------------------------------------- */
 body{
    background: #D3D3CC;
@@ -19,7 +19,7 @@ body{
    font-size: 12px;
 }
 
-#mission-box{
+#missionBox{
   background: #862600;
   color: #fff;
   height: 50px;
@@ -32,25 +32,142 @@ body{
   padding-top: 6px;
 }
 
-#under-carousel {
+#bodyDiv {
   background-color: white;
   color:black;
+
 }
 
-
-#calendarBox {
-  background-color: white;
-  color: black;
+#homeAbout {
+  padding: 10px 0 30px 0; 
+  margin: 20px; 
+  border-bottom: 
+  solid 1px #4d4344;
 }
 
-#programsBox {
-  background-color:white;
-  color: black;
+#homeEvents {
+  padding: 0px 0 30px 0; 
+  margin: 20px;
 }
+
+#homeUpdates {
+  padding: 0px 0 20px 0; 
+  margin: 20px;
+}
+
+thead {
+  background-color: #eee;
+}
+
 
 #programpics{
   margin-left: 30px;
   margin-right: 30px;
+}
+
+#resourcesBox {
+  background-color: white;
+  color: black;
+}
+
+#resourcesBox img{
+  padding:1px;
+  border:1px solid #021a40;
+}
+
+#resourcechoices{
+  margin-top: 20px;
+  margin-left: 30px;
+  margin-right: 30px;
+}
+
+
+.well {
+  color: black;
+  font-size: 10px;
+}
+
+.menubox {
+  font-size: 10px;
+}
+
+#toggle-view {
+  list-style: none;
+  font-size: 11px;
+  margin-right: 20px;
+  padding-right: 20px;
+  width: auto;
+}
+
+#toggle-view li {
+  margin: 20px;
+  border-bottom: 1px solid #ccc;
+  position: relative;
+  cursor: pointer;
+}
+
+#toggle-view h3 {
+  margin: 0;
+  font-size: 14px;  
+}
+
+#toggle-view span {
+  position: absolute;
+  right: 5px; top: 0;
+  color: #ccc;
+  font-size: 13px;
+}
+
+#toggle-view .panel {
+  margin: 5px 10px;
+  display: none;
+  padding: 10px;
+}
+
+.container .contact {
+  padding: 50px;
+}
+
+footer{
+  background-color: #1F1F1F;
+  border-top: solid 5px #537368;
+  color: chocolate;
+  padding: 30px 20px;
+  font-size: 10px;
+}
+
+footer address {
+  color: grey;
+}
+
+footer address a{
+  color: white;
+}
+
+footer a{
+  color:white;
+}
+
+footer a:hover {
+  color: white;
+}
+
+footer .col-md-4:last-child .footerContent{
+  border-right: none;
+ 
+}
+
+.footerContent {
+  border-right:solid 1px grey;
+
+}
+
+#copyright {
+  text-align: center;
+  background-color: #862600;
+  color: white;
+  padding: 10px; 
+  font-size: 8px;
 }
 
 
@@ -63,14 +180,6 @@ body {
 
 }
 
-#copyright {
-  text-align: center;
-  background-color: #862600;
-  color: white;
-  padding: 10px; 
-}
-
-
 /* --------------------------------------
    Navbar
    -------------------------------------- */
@@ -78,7 +187,8 @@ body {
 .navbar-default {
   background-color: #ffffff;
   border-bottom: solid 5px #537368;
-  box-shadow: 1px 1px 7px black; 
+  box-shadow: 1px 1px 7px black;
+  margin-bottom: 0px; 
 }
 .navbar-default .navbar-brand {
   color: #515151;
@@ -131,10 +241,11 @@ body {
 
 .navbar-nav li a {
    line-height: 100px;
+   font-size: 11px;
 }
 
 .dropdown-menu li a {
-   line-height: 50px;
+   line-height: 20px;
 }
 .navbar-nav>li>.dropdown-menu {
   margin-top: -50px;
@@ -148,7 +259,6 @@ body {
 #myCarousel{
   margin-top: 0px;
   width: auto;
-
 }
 
 .carousel-caption {
@@ -179,32 +289,6 @@ body {
 
 }
 
-thead {
-  background-color: #eee;
-}
-
-footer{
-  background-color: #1F1F1F;
-  border-top: solid 5px #537368;
-  color: chocolate;
-  padding: 30px 20px;
-}
-
-footer a{
-  color:white;
-}
-
-footer a:hover {
-  color: white;
-}
-
-footer .col-md-4:last-child .footerContent{
-  border-right:none;
-}
-
-.footerContent{
-  border-right:solid 1px white;
-}
 
 /* --------------------------------------
    Media Queries
@@ -227,21 +311,23 @@ footer .col-md-4:last-child .footerContent{
 /* Landscape phone to portrait tablet */
 @media (max-width: 768px) {
    
-   .navbar-brand{
+  .navbar-brand{
       display:none
    }
 
-   .navbar-nav li a {
+  .navbar-nav li a {
    line-height: 30px;
    }
 
+
   .footerContent{
     text-align: center !important;
-    border-right: none;
     margin-bottom:20px;
+    border-right: none;
   }
+
   .footerContent ul{
-    margin:0 !important;
+    margin: 0 !important;
   }
 
 }

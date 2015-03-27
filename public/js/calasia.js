@@ -3,7 +3,8 @@ angular.module('calasia',['ngRoute'])
 	.config(["$routeProvider", "$locationProvider", "$interpolateProvider", function ($routeProvider, $locationProvider, $interpolateProvider){
 		$routeProvider
 			.when('/',{
-				templateUrl: 'partials/home'
+				templateUrl: 'partials/home',
+				controller: "homeCtrl"
 			})
 			.when('/programs',{
 				templateUrl: 'partials/programs',
@@ -13,20 +14,69 @@ angular.module('calasia',['ngRoute'])
 				templateUrl: 'partials/calendar',
 				controller:"calendarCtrl"
 			})
+			.when('/resources',{
+				templateUrl: 'partials/resources',
+				controller:"resourcesCtrl"
+			})
+			.when('/membership', {
+				templateUrl: 'partials/membership'
+			})
+			.when('/contact',{
+				templateUrl: 'partials/contact'
+			})
+			.when('/about',{
+				templateUrl: 'partials/about'
+			})
 			.when('/login',{
-				templateUrl: 'partials/login'
+				templateUrl: 'partials/login',
+				controller: 'loginCtrl'
 			})
 			.when('/admin',{
 				templateUrl: 'partials/admin',
-				controller: 'adminCtrl'
+				controller: 'adminCtrl',
+				resolve:{
+					auth: function ($q, authenticationService, $location){
+						var userInfo = authenticationService.getUserInfo();
+						if (userInfo) {
+							return $q.when(userInfo);
+						}
+						else{
+							$location.path('/login');
+							return $q.reject({authenticated:false});
+						}
+					}
+				}
 			})
 			.when('/addEvent',{
 				templateUrl: 'partials/addEvent',
-				controller:"addEventCtrl"
+				controller:"addEventCtrl",
+				resolve:{
+					auth: function ($q, authenticationService, $location){
+						var userInfo = authenticationService.getUserInfo();
+						if (userInfo) {
+							return $q.when(userInfo);
+						}
+						else{
+							$location.path('/login');
+							return $q.reject({authenticated:false});
+						}
+					}
+				}
 			})
 			.when('/editEvent/:id',{
 				templateUrl:'partials/addEvent',
-				controller:"editEventCtrl"
+				controller:"editEventCtrl",
+				resolve:{
+					auth: function ($q, authenticationService){
+						var userInfo = authenticationService.getUserInfo();
+						if (userInfo) {
+							return $q.when(userInfo);
+						}
+						else{
+							return $q.reject({authenticated:false});
+						}
+					}
+				}
 			})
 			.otherwise({
 		      redirectTo: '/'
@@ -55,6 +105,14 @@ angular.module('calasia',['ngRoute'])
 			$(selector).modal('show');
 		}
 	})
+	.controller("homeCtrl",function ($scope, $http){
+		$http.get("/api/upcomingEvents").success(function(data, status, headers, config){
+			if(data.length==0){
+				data.push({name:"No Upcoming Events"});
+			}
+			$scope.upcomingEvents = data;
+		})
+	})
 	.controller("calendarCtrl",function ($scope, $http){
 		$http.get("/api/upcomingInternalEvents").success(function(data, status, headers, config){
 			if(data.length==0){
@@ -72,6 +130,18 @@ angular.module('calasia',['ngRoute'])
 			var selector = "#"+id;
 			$(selector).modal('show');
 		}
+	})
+	.controller("resourcesCtrl",function (){
+		$(".menubox").hide();
+
+		$(".menuitem").click(function(event) {
+			event.preventDefault();
+			$(".menubox").hide();
+			var relatedDivID = $(this).attr('href');
+
+			$("" + relatedDivID).fadeToggle("fast", "linear");
+
+		});
 	})
 	.controller("addEventCtrl",function ($scope, $http, $location){
 		$scope.form = {};
@@ -159,7 +229,6 @@ angular.module('calasia',['ngRoute'])
 			$(':radio[value='+$scope.form.eventType+']').prop('checked',true);
 			if($('#external').prop('checked') == true) $('#externalLink').prop('disabled', false);
 	    	else $('#externalLink').prop('disabled', true);
-	    	console.log($scope.form.eventType == "internal")
 		});
 		
 		$scope.submitEvent = function () {
@@ -204,9 +273,8 @@ angular.module('calasia',['ngRoute'])
 				});
 		};
 	})
-	.controller("adminCtrl", function ($scope, $http, $timeout){
+	.controller("adminCtrl", function ($scope, $http, $timeout, $location, authenticationService){
 		$http.get('/api/events').success(function(data, status, headers, config){
-			console.log(data);
 			$scope.events = data;
 			$scope.count = $scope.events.length;
 		})
@@ -220,7 +288,97 @@ angular.module('calasia',['ngRoute'])
 		        })
 		    }
 		}
+		$scope.logout = function() {
+	    authenticationService.logout()
+	      .then(function (result) {
+	        $scope.userInfo = null;
+	        $location.path("/login");
+	      }, function (error) {
+	        console.log(error);
+	      });
+	  }
 	})
+	.controller("loginCtrl", function ($scope,$location,$window,authenticationService){
+		$scope.userInfo = null;
+		$scope.login = function () {
+			authenticationService.login($scope.userName, $scope.password)
+			.then(function (result) {
+				$scope.userInfo = result;
+				$location.path("/admin");
+			}, function (error) {
+				console.log(error);
+				$window.alert("Invalid Credentials");
+				console.log(error);
+				});
+		};
+		$scope.clear = function(){
+			$scope.userName = "";
+			$scope.password = "";
+		};
+	})
+	.factory("authenticationService", function ($http, $q, $window){
+		var userInfo;
+		function login(userName, password){
+			var deferred = $q.defer();
+			$http.post("/api/login", {
+				userName:userName,
+				password:password
+			}).then(function(result){
+				userInfo={
+					accessToken: result.data.access_token,
+					userName:result.data.userName
+				};
+				$window.sessionStorage["userInfo"]=JSON.stringify(userInfo);
+				deferred.resolve(userInfo);
+			}, function (error){
+				deferred.reject(error);
+			});
+			return deferred.promise;
+		};
+		function logout(){
+			var deferred = $q.defer();
+			$http({
+				method:"POST",
+				url:"/api/logout",
+				headers:{
+					"access_token": userInfo.accessToken
+				}
+			}).then(function(result) {
+				$window.sessionStorage["userInfo"] = null;
+				userInfo = null;
+				deferred.resolve(result);
+			}, function (error) {
+				deferred.reject(error);
+			});
+			return deferred.promise;
+		}
+
+		function getUserInfo() {
+			return userInfo;
+		}
+		function init(){
+			if ($window.sessionStorage["userInfo"]) {
+				userInfo = JSON.parse($window.sessionStorage["userInfo"]);
+			}
+		}
+		init();
+		return {
+			login: login,
+			logout: logout,
+			getUserInfo: getUserInfo
+		};
+	})
+	.run(["$rootScope", "$location", function ($rootScope, $location) {
+	  $rootScope.$on("$routeChangeSuccess", function(userInfo) {
+	    // console.log(userInfo);
+	  });
+	 
+	  $rootScope.$on("$routeChangeError", function (event, current, previous, eventObj) {
+	    if (eventObj.authenticated === false) {
+	      $location.path("/login");
+	    }
+	  });
+	}]);
 Date.prototype.formatDate = function () {
   var monthArr = ["January","February","March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
   var weekdayArr = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];

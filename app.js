@@ -46,7 +46,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 var tokens = [];
 
 function requiresAuthentication(request, response, next) {
-    console.log(request.headers);
+    // console.log(request.headers);
     if (request.headers.access_token) {
         var token = request.headers.access_token;
         if (_.where(tokens, token).length > 0) {
