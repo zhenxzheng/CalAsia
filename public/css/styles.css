@@ -1,16 +1,9 @@
-.breadcrumb li{
-  cursor:pointer;
-}
-.breadcrumb li:first-child{
-  cursor:none;
-}
-
 /*
 
 My Custom CSS
 =============
 
-Author:  Shin San
+Author:  
 Updated: March 2015
 Notes:	 Hand coded for California-Asia Business Council (Cal-Asia)
 
@@ -98,6 +91,15 @@ thead {
   font-size: 10px;
 }
 
+#membershipBox {
+  font-size: 10px;
+}
+
+#membershipBox #toggle-view .panel{
+  padding-right:0;
+  margin-right:0;
+}
+
 #toggle-view {
   list-style: none;
   font-size: 11px;
@@ -110,12 +112,12 @@ thead {
   margin: 20px;
   border-bottom: 1px solid #ccc;
   position: relative;
-  cursor: pointer;
 }
 
 #toggle-view h3 {
   margin: 0;
-  font-size: 14px;  
+  font-size: 14px;
+  cursor:pointer;
 }
 
 #toggle-view span {
@@ -133,6 +135,22 @@ thead {
 
 .container .contact {
   padding: 50px;
+}
+
+#toggle-view #toggle-view{
+  padding-left:0;
+  margin-right:0;
+  padding-right:0;
+}
+#toggle-view #toggle-view li{
+  margin-left:0;
+  margin-right:0;
+  padding-right:0;
+}
+
+#toggle-view #toggle-view li strong{
+  cursor: pointer;
+  display:block;
 }
 
 footer{
@@ -269,21 +287,23 @@ body {
 }
 
 .carousel-caption {
-  font-size:24px;
+  background-color: rgba(0, 0, 0, 0.4);
+  background: rgba(0, 0, 0, 0.4);
+  font-size: 12px;
 }
 
-#myCarousel .item { height: 300px; }
+#myCarousel .item { height: 400px; }
 
 #slide1 {
-  background: url('http://placehold.it/940x400') top center no-repeat;
+  background: url('../img/carousel/A_AN14-large.jpg') top center no-repeat;
 }
 
 #slide2 {
-  background: url('http://placehold.it/940x400') top center no-repeat;
+  background: url('../img/carousel/B_CML-large.jpg') top center no-repeat;
 }
 
 #slide3 {
-  background: url('http://placehold.it/940x400') top center no-repeat;
+  background: url('http://upload.wikimedia.org/wikipedia/commons/7/75/Bandovietnam-final-fill-scale.svg') center no-repeat;
 }
 
 /* --------------------------------------

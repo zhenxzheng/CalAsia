@@ -27,13 +27,15 @@ angular.module('calasia',['ngRoute'])
 				controller:"resourcesCtrl"
 			})
 			.when('/membership', {
-				templateUrl: 'partials/membership'
+				templateUrl: 'partials/membership',
+				controller:"membershipCtrl"
 			})
 			.when('/contact',{
 				templateUrl: 'partials/contact'
 			})
 			.when('/about',{
-				templateUrl: 'partials/about'
+				templateUrl: 'partials/about',
+				controller: 'aboutCtrl'
 			})
 			.when('/login',{
 				templateUrl: 'partials/login',
@@ -123,6 +125,32 @@ angular.module('calasia',['ngRoute'])
 			}
 			$scope.upcomingEvents = data;
 		})
+	})
+	.controller("aboutCtrl", function(){
+		$('#toggle-view li h3, #toggle-view li strong').click(function () {
+	        var text = $(this).parent().children('div.panel');
+	        if (text.is(':hidden')) {
+	            text.slideDown('200');
+	            $(this).children('span').html('-');        
+	        } else {
+	            text.slideUp('200');
+	            $(this).children('span').html('+');        
+	        }
+	        
+	    });
+	})
+	.controller("membershipCtrl", function(){
+		$('#toggle-view li h3, #toggle-view li strong').click(function () {
+	        var text = $(this).parent().children('div.panel');
+	        if (text.is(':hidden')) {
+	            text.slideDown('200');
+	            $(this).children('span').html('-');        
+	        } else {
+	            text.slideUp('200');
+	            $(this).children('span').html('+');        
+	        }
+	        
+	    });
 	})
 	.controller("calendarCtrl",function ($scope, $http){
 		$http.get("/api/upcomingInternalEvents").success(function(data, status, headers, config){

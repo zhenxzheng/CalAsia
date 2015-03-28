@@ -3,7 +3,7 @@
 CalAsia.Org Custom JS
 ============
 
-Author:  Shin Thu san
+Author:  
 Updated: March 2015
 Notes:	 Hand coded for California-Asia Business Council (Cal-Asia)
 
@@ -15,17 +15,16 @@ $(document).ready(function() {
 	$(".menuitem").click(function(event) {
 		event.preventDefault();
 		$(".menubox").hide();
-		var relatedDivID = $(this).attr('value');
+		var relatedDivID = $(this).attr('href');
 
 		$("" + relatedDivID).fadeToggle("fast", "linear");
 
 	});
 });
 
-$(document).ready(function () {
     
-    $('#toggle-view li').click(function () {
-        var text = $(this).children('div.panel');
+    $('#toggle-view li h3, #toggle-view li strong').click(function () {
+        var text = $(this).parent().children('div.panel');
         if (text.is(':hidden')) {
             text.slideDown('200');
             $(this).children('span').html('-');        
@@ -35,4 +34,3 @@ $(document).ready(function () {
         }
         
     });
-});

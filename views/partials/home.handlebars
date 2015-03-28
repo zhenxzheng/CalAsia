@@ -1,90 +1,94 @@
-<!-- II Carousel --> 
-<div class="span 6 offset6" id="carousel-container">
-  <div class="carousel slide" id="myCarousel">
+      <!-- II Carousel --> 
+      <div class="span 6 offset6" id="carouselContainer">
+        <div class="carousel slide" id="myCarousel">
 
-    <!-- Indicators -->
-    <ol class="carousel-indicators">
-      <li class="active" data-slide-to="0" data-target="#myCarousel"></li>
-      <li data-slide-to="1" data-target="#myCarousel"></li>
-      <li data-slide-to="2" data-target="#myCarousel"></li>
-    </ol>
+          <!-- Indicators -->
+          <ol class="carousel-indicators">
+            <li class="active" data-slide-to="0" data-target="#myCarousel"></li>
+            <li data-slide-to="1" data-target="#myCarousel"></li>
+            <li data-slide-to="2" data-target="#myCarousel"></li>
+          </ol>
 
-    <!-- Wrapper for slides --> 
-    <div class="carousel-inner">
-      <div class="item active" id="slide1">
-        <div class="carousel-caption">
-        <h4>Test caption</h4>
-        <p>Chong Moon Lee at Asia Night</p>
-        </div><!--end carousel-caption --> 
-      </div><!-- end item active -->  
+          <!-- Wrapper for slides --> 
+          <div class="carousel-inner">
+            <div class="item active" id="slide1">
+              <div class="carousel-caption">
+              <h4>Asia Night 2014</h4>
+              <p>(From Left to Right) Liz Ferguson (Chairwoman), Richard Blum (Blum Capital), Jeremy Potash (Executive Director), and George Sycip (Vice President) after presenting Mr. Blum the 2014 New Silk Road Award</p>
+              </div><!--end carousel-caption --> 
+            </div><!-- end item active -->  
 
-      <div class="item" id="slide2">
-        <div class="carousel-caption">
-          <h4>Test caption 2</h4>
-          <p>Featured program</p>
-        </div><!-- end carousel-caption-->
-      </div><!-- end item 2 --> 
+            <div class="item" id="slide2">
+              <div class="carousel-caption">
+                <h4>Asia Night 2012</h4>
+                <p>New Silk Road Recipient Mr. Chong-Moon Lee giving a speech on the rise of Asia</p>
+              </div><!-- end carousel-caption-->
+            </div><!-- end item 2 --> 
 
-      <div class="item" id="slide3">
-        <div class="carousel-caption">
-          <h4>Test caption 2</h4>
-          <p>Featured program</p>
-        </div><!-- end carousel-caption-->
-      </div><!-- end item 3 --> 
-    </div><!-- end carousel-inner -->
+            <div class="item" id="slide3">
+              <div class="carousel-caption">
+                <h4>Upcoming Cal-Asia Event</h4>
+                <p><a href="https://www.eventbrite.com/e/business-opportunities-in-vietnam-breakfast-briefing-tickets-16045945856" target="_blank">Breakfast Briefing: Business Opportunities in Vietnam</p>
+              </div><!-- end carousel-caption-->
+            </div><!-- end item 3 --> 
+          </div><!-- end carousel-inner -->
 
-    <!-- Controls -->
-    <a class="left carousel-control" data-slide="prev" href="#myCarousel"><span class="icon-prev"></span></a>
-    <a class="right carousel-control" data-slide="next" href="#myCarousel"><span class="icon-next"></span></a> 
+          <!-- Controls -->
+          <a class="left carousel-control" data-slide="prev" href="#myCarousel"><span class="icon-prev"></span></a>
 
-  </div><!-- end myCarousel -->
-</div><!-- end carousel-container -->
+          <a class="right carousel-control" data-slide="next" href="#myCarousel"><span class="icon-next"></span></a> 
 
-<!-- Under Caroursel -->
-<div id="under-carousel">
-  <div class="row" id="wrapper">
-    <div class="col-md-8" id="leftColumn">
-      <div id="About" style="padding: 10px 0 30px 0; margin: 20px; border-bottom: solid 1px #4d4344;">
-        <h4> About Our Work</h4>
-        <p style="padding: 0 30px;"> California-Asia Business Council (Cal-Asia) is one of California's leading private-sector, non-profit, international business-promotion associations. Our mission is to help California firms of all sizes develop or expand their commercial ties with the economies of Pacific Asia and India. Cal-Asia members range from some of the nation's largest multinational companies to small and medium-sized exporters, importers, manufacturers, and service companies. Industries represented range from infrastructure development to technology, and also export-import, resource development, global transportation, engineering and design, banking and finance. </p> 
-      </div><!-- end About -->
+        </div><!-- end myCarousel -->
+      </div><!-- end carousel-container -->
 
-      <div id="Events" style="padding: 0px 0 30px 0; margin: 20px;">
-        <h4><span class="glyphicon glyphicon-calendar"> </span> Upcoming Cal-Asia and Partner Events</h4>
-        <p style="padding: 0 30px;" ng-repeat="event in upcomingEvents">
-          [[event.name]]<br> 
-          <span ng-show="event.description">
-          [[event.description[0].substring(0,50)]]...
-          <br>
-          <span ng-show="event.past">
-          <a href="#">Details</a> | <a href="[[event.registration.url]]">Registration</a>
-          </span>
-        </p>
-      </div><!-- end Events -->   
-    </div><!-- end left column --> 
+      <!-- III About, Events; Updates; Twitter -->
+      <div class="row">
+        <div class="col-md-8">
 
-    <div class="col-md-4" id="rightColumn">
+          <!-- 1 About Our Work -->
+          <div id="homeAbout" id="leftColumn">
+            <h4> About Our Work</h4>
+            <p style="padding: 0 30px;"> California-Asia Business Council (Cal-Asia) is one of California's leading private-sector, non-profit, international business-promotion associations. Our mission is to help California firms of all sizes develop or expand their commercial ties with the economies of Pacific Asia and India. Cal-Asia members range from some of the nation's largest multinational companies to small and medium-sized exporters, importers, manufacturers, and service companies. Industries represented range from infrastructure development to technology, and also export-import, resource development, global transportation, engineering and design, banking and finance. </p> 
+          </div><!-- end homeAbout -->
 
-      <div id="NewsUpdates" style="padding: 0px 0 20px 0; margin: 20px;"> 
-        <h4><span class="glyphicon glyphicon-asterisk"></span> News and Updates</h4>
-        <p style="padding: 0 30px;">
-          Update 1<br> 
-          Description<br>
-          <a href="#">Read More >></a><br>
-        </p>
+          <!-- 2 Upcoming Events -->
+          <div id="homeEvents">
+            <h4><span class="glyphicon glyphicon-calendar"> </span> Upcoming Cal-Asia and Partner Events</h4>
+            <p style="padding: 0 30px;" ng-repeat="event in upcomingEvents">
+              [[event.name]]<br> 
+              <span ng-show="event.description">
+              [[event.description[0].substring(0,50)]]...
+              <br>
+              <span ng-show="event.past">
+              <a href="#">Details</a> | <a href="[[event.registration.url]]">Registration</a>
+              </span>
+            </p>
+          </div><!-- end homeEvents -->   
+        </div><!-- end col-md-8 leftColumn --> 
 
-        <p style="padding: 0 30px;">
-          Update 2<br>
-          Description<br>
-          <a href="#">Read More >></a><br>
-        </p>
-      </div><!-- end NewsUpdates -->
+        <div class="col-md-4" id="rightColumn">
 
-      <div id="Twitter" style="padding: 0px 0 20px 0; margin: 20px;">
+          <!-- 3 News & Updates -->   
+          <div id="homeUpdates"> 
+            <h4><span class="glyphicon glyphicon-asterisk"></span> News and Updates</h4>
+            <p style="padding: 0 30px;">
+              Update 1<br> 
+              Description<br>
+              <a href="#">Read More >></a><br>
+              </p>
 
-        <a class="twitter-timeline"  href="https://twitter.com/calasiaorg"  data-widget-id="449677084760104961">Cal-Asia Insights on Twitter</a>
-        <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-      </div><!-- end twitter -->
-    </div><!-- end col-md-4 -->
-  </div><!-- end row wrapper--> 
-</div><!-- end container under carousel-->
+              <p style="padding: 0 30px;">
+                Update 2<br>
+                Description<br>
+                <a href="#">Read More >></a><br>
+            </p>
+           </div><!-- end homeUpdates -->
+
+          <!-- 4 Twitter -->  
+          <div id="Twitter" style="padding: 0px 0 20px 0; margin: 20px;">
+            <a class="twitter-timeline"  href="https://twitter.com/calasiaorg"  data-widget-id="449677084760104961">Cal-Asia Insights on Twitter</a>
+                      
+                      <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script> 
+                  </div>
+        </div><!-- end col-md-4 rightColumn-->  
+      </div><!-- end row -->
