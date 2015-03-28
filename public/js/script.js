@@ -15,7 +15,7 @@ $(document).ready(function() {
 	$(".menuitem").click(function(event) {
 		event.preventDefault();
 		$(".menubox").hide();
-		var relatedDivID = $(this).attr('href');
+		var relatedDivID = $(this).attr('value');
 
 		$("" + relatedDivID).fadeToggle("fast", "linear");
 

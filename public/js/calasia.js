@@ -10,11 +10,19 @@ angular.module('calasia',['ngRoute'])
 				templateUrl: 'partials/programs',
 				controller:"programsCtrl"
 			})
+			.when('/programs/:year',{
+				templateUrl: 'partials/programs',
+				controller: "programsCtrl"
+			})
 			.when('/calendar',{
 				templateUrl: 'partials/calendar',
 				controller:"calendarCtrl"
 			})
 			.when('/resources',{
+				templateUrl: 'partials/resources',
+				controller:"resourcesCtrl"
+			})
+			.when('/resources/:country',{
 				templateUrl: 'partials/resources',
 				controller:"resourcesCtrl"
 			})
@@ -86,13 +94,16 @@ angular.module('calasia',['ngRoute'])
   		$interpolateProvider.endSymbol(']]');
 	}])
 	.controller("programsCtrl",function ($scope, $http, $routeParams){
-		$http.get("/api/events").success(function(data, status, headers, config){
-			if(data.length==0){
-				data.push({name:"No Events"});
-			}
-			$scope.events = data;
-		})
-		$scope.filterYear = function (year){
+		if($routeParams.year==undefined){
+			$http.get("/api/events").success(function(data, status, headers, config){
+				if(data.length==0){
+					data.push({name:"No Events"});
+				}
+				$scope.events = data;
+			})
+		}
+		else{
+			var year = $routeParams.year;
 			$http.get("/api/events/"+year).success(function(data, status, headers, config){
 				if(data.length==0){
 					data.push({name:"No Events in "+year});
@@ -131,7 +142,7 @@ angular.module('calasia',['ngRoute'])
 			$(selector).modal('show');
 		}
 	})
-	.controller("resourcesCtrl",function (){
+	.controller("resourcesCtrl",function ($scope, $routeParams){
 		$(".menubox").hide();
 
 		$(".menuitem").click(function(event) {
@@ -142,6 +153,16 @@ angular.module('calasia',['ngRoute'])
 			$("" + relatedDivID).fadeToggle("fast", "linear");
 
 		});
+		$(".nav-tabs li").click(function(event){
+			event.preventDefault();
+			var tabID = $(this).attr('href');
+			$(""+tabID).tab('show');
+		})
+		if($routeParams.country != undefined){
+			$('html,body').animate({scrollTop: $('#economyMenu').offset().top},1000);
+			var country = $routeParams.country;
+			$('#'+country).fadeToggle("fast", "linear");
+		}
 	})
 	.controller("addEventCtrl",function ($scope, $http, $location){
 		$scope.form = {};
