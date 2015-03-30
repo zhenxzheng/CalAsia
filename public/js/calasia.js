@@ -445,3 +445,10 @@ function getDateObj(dateString){
   // var month = (parseInt(data[1])-1).toString();
   return  new Date(dateString);
 }
+
+$('.extLink').find('span').css('opacity', 0);
+$('.extLink').hover(function(){
+	$(this).find('span').css('opacity', 1);
+}, function(){
+	$(this).find('span').css('opacity', 0);
+})
