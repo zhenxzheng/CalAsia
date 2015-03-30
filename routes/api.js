@@ -142,6 +142,7 @@ exports.editEvent = function (req, res){
 			result.image = req.body.image;
 			result.speakers = req.body.speakers;
 			result.price = req.body.price;
+			result.memberPrice = req.body.memberPrice;
 			result.sponsors = req.body.sponsors;
 			result.regLink = req.body.regLink;
 			result.schedule = req.body.schedule;

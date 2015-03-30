@@ -441,8 +441,8 @@ Date.prototype.convertDate = function(){
 }
 
 function getDateObj(dateString){
-  // var data = dateString.split("-");
-  // var month = (parseInt(data[1])-1).toString();
+	/* var data = dateString.split("-");
+	var month = (parseInt(data[1])-1).toString();*/
   return  new Date(dateString);
 }
 

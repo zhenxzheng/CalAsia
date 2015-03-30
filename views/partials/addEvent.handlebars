@@ -40,6 +40,10 @@
       <h4> Price: <span ng-show="form.price">$[[form.price]]</span> </h4>
       <input class="form-control" style="width:100%" placeholder="123" type="number" ng-model="form.price">
     </div>
+     <div style="display:inline-block; padding:10px; width:33%">
+      <h4> Member Price: <span ng-show="form.price">$[[form.price]]</span> </h4>
+      <input class="form-control" style="width:100%" placeholder="123" type="number" ng-model="form.memberPrice">
+    </div>
     <div style="display:inline-block; padding:10px; width:33%">
       <h4> Registration Deadline:</h4>
       <input id="test" class="form-control" type="date" style="width:100%" ng-model="form.registration.date.full">
