@@ -152,6 +152,12 @@ thead {
   cursor: pointer;
 }
 
+#internshipBox {
+  margin-top: 20px;
+  margin-right: 40px;
+  margin-left: 40px;
+}
+
 footer{
   background-color: #1F1F1F;
   border-top: solid 5px #537368;

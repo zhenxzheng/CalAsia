@@ -37,6 +37,9 @@ angular.module('calasia',['ngRoute','ngSanitize'])
 				templateUrl: 'partials/about',
 				controller: 'aboutCtrl'
 			})
+			.when('/internship',{
+				templateUrl: 'partials/internship'
+			})
 			.when('/login',{
 				templateUrl: 'partials/login',
 				controller: 'loginCtrl'
