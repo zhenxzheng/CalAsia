@@ -100,7 +100,7 @@ angular.module('calasia',['ngRoute','ngSanitize'])
 	}])
 	.controller("programsCtrl",function ($scope, $http, $routeParams){
 		if($routeParams.year==undefined){
-			$http.get("/api/events").success(function(data, status, headers, config){
+			$http.get("/api/events/2015").success(function(data, status, headers, config){
 				if(data.length==0){
 					data.push({name:"No Events"});
 				}
