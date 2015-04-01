@@ -314,7 +314,10 @@ body {
   height: 300px;
 
 }
-
+ .modal-body{
+    max-height:400px;
+    overflow-y:scroll;
+}
 
 /* --------------------------------------
    Media Queries
@@ -330,7 +333,6 @@ body {
    .navbar-nav li a {
    line-height: 30px;
    }
-
 }
 
 
@@ -355,16 +357,14 @@ body {
   .footerContent ul{
     margin: 0 !important;
   }
-
 }
 
 /* Large desktop */
 @media (max-width: 991px) {
    
-.twitter-timeline {
-  width: 100% !important;
-}
-
+  .twitter-timeline {
+    width: 100% !important;
+  }
 }
 
 

@@ -1,5 +1,5 @@
 'use strict';
-angular.module('calasia',['ngRoute'])
+angular.module('calasia',['ngRoute','ngSanitize'])
 	.config(["$routeProvider", "$locationProvider", "$interpolateProvider", function ($routeProvider, $locationProvider, $interpolateProvider){
 		$routeProvider
 			.when('/',{
@@ -102,6 +102,13 @@ angular.module('calasia',['ngRoute'])
 					data.push({name:"No Events"});
 				}
 				$scope.events = data;
+				// $scope.events.forEach(function(item, i){
+				// 	console.log(item);
+				// 	item.description.forEach(function (paragraph){
+				// 		console.log(paragraph);
+				// 		paragraph = $.parseHTML(paragraph);
+				// 	})
+				// })
 			})
 		}
 		else{
@@ -224,6 +231,9 @@ angular.module('calasia',['ngRoute'])
 					$scope.form.registration.date.string = weekdayArr[$scope.form.registration.date.full.getDay()] +", "+monthArr[$scope.form.registration.date.full.getMonth()]+" "+$scope.form.registration.date.full.getDate()+", "+$scope.form.registration.date.full.getFullYear();	
 				}
 			}
+			if($scope.form.registration.url != undefined){
+				if ($scope.form.registration.url.substring(0,4) != "http") $scope.form.registration.url = "http://"+$scope.form.registration.url;
+			}
 			if($scope.form.images!=undefined) $scope.form.images = $scope.form.images.split(/, */);
 			if($scope.form.speakers!=undefined) $scope.form.speakers = $scope.form.speakers.split(/, */);
 			if($scope.form.sponsors!=undefined) $scope.form.sponsors = $scope.form.sponsors.split(/, */);
@@ -295,6 +305,9 @@ angular.module('calasia',['ngRoute'])
 				if($scope.form.registration.date.full){
 					$scope.form.registration.date.string = weekdayArr[$scope.form.registration.date.full.getDay()] +", "+monthArr[$scope.form.registration.date.full.getMonth()]+" "+$scope.form.registration.date.full.getDate()+", "+$scope.form.registration.date.full.getFullYear();	
 				}
+			}
+			if($scope.form.registration.url != undefined){
+				if ($scope.form.registration.url.substring(0,4) != "http") $scope.form.registration.url = "http://"+$scope.form.registration.url;
 			}
 			if($scope.form.images!=undefined) $scope.form.images = $scope.form.images.split(/, */);
 			if($scope.form.speakers!=undefined) $scope.form.speakers = $scope.form.speakers.split(/, */);
