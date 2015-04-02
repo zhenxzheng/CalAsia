@@ -133,8 +133,12 @@ angular.module('calasia',['ngRoute','ngSanitize'])
 			if(data.length==0){
 				data.push({name:"No Upcoming Events"});
 			}
-			$scope.upcomingEvents = data;
+			$scope.upcomingEvents = data.slice(0,2);
 		})
+		$scope.showModal = function (id){
+			var selector = "#"+id;
+			$(selector).modal('show');
+		}
 	})
 	.controller("aboutCtrl", function(){
 		$('#toggle-view li h3, #toggle-view li strong').click(function () {
