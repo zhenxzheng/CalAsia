@@ -90,7 +90,7 @@
 								</div><!-- end modal header-->
 
 								<div class="modal-body">
-								<p ng-repeat="paragraph in event.description" ng-bind-html="paragraph"></p> 
+								<p ng-repeat="paragraph in event.description" ng-bind-html="paragraph">[[paragraph]]</p> 
 								<p ng-repeat="paragraph in event.schedule" ng-bind-html="paragraph">[[paragraph]]</p>
 
 								</div><!-- end modal body-->
