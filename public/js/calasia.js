@@ -343,8 +343,12 @@ angular.module('calasia',['ngRoute','ngSanitize'])
 			$scope.events = data;
 			$scope.count = $scope.events.length;
 		})
+		$scope.showModal = function (id){
+			var selector = "#"+id;
+			$(selector).modal('show');
+		}
 		$scope.deleteEvent = function(id){
-		    var current = "#"+id;
+		    var current = "."+id;
 		    if(confirm("Are you sure you want to delete this event?")==true){
 		      $http.delete('api/events/'+id)
 		        .success(function(data){

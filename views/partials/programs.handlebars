@@ -124,10 +124,10 @@
 						<tbody>
 							<!-- start 2014 Event 1/12 -->
 							<tr ng-repeat="event in events">
-								<th scope="row"><a ng-click="showModal([[event._id]])" data-toggle="modal">[[event.name]]</a></th>
+								<th scope="row"><a ng-click="showModal([[event._id]])" data-toggle="modal" style="cursor:pointer">[[event.name]]</a></th>
 								<td>[[event.date.string]]</td>
 								<td>[[event.speakers.join(", ")]]</td>
-								<td>[[event.sponsors.join(", ")]]</td>
+								<td ng-bind-html="event.sponsors">[[event.sponsors.join(", ")]]</td>
 							</tr>
 						</tbody>
 					</table>

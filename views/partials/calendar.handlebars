@@ -20,18 +20,23 @@
 							</div><!-- end modal header-->
 
 							<div class="modal-body">
-							<p ng-repeat="paragraph in event.description">[[paragraph]]</p> 
-							<p ng-repeat="paragraph in event.schedule">[[paragraph]]</p>
+							<p ng-repeat="paragraph in event.description" ng-bind-html="paragraph">[[paragraph]]</p> 
+							<p ng-repeat="paragraph in event.schedule" ng-bind-html="paragraph">[[paragraph]]</p>
 
 							</div><!-- end modal body-->
 
 							<div class="modal-footer">
+								<div ng-if="event.past" style="display:inline-block; color:red" class="pull-left">
+									<p>This event has passed.</p>
+								</div>
 								<button ng-show="event.externalLink" class="btn btn-default" type="button">
-										<a href="[[event.externalLink]]" target="_blank">
-											More Details <span class="glyphicon glyphicon-new-window"></span>
-										</a>
-									</button>
-								<button class="btn btn-success" type="button">Register for this Event</button>
+									<a href="[[event.externalLink]]" target="_blank">
+										More Details <span class="glyphicon glyphicon-new-window"></span>
+									</a>
+								</button> 
+								<div ng-if="!event.past" style="display:inline-block">
+									<a href="[[event.registration.url]]" target="_blank" ng-show="event.registration.url"><button class="btn btn-success" type="button">Register for this Event</button></a>
+								</div>
 								<button class="btn btn-primary" data-dismiss="modal" type="button">Close</button>
 							</div><!-- end modal-footer -->
 						</div><!-- end modal content -->
@@ -49,11 +54,11 @@
 					</thead>		
 					<tbody>
 						<tr ng-repeat="event in internalEvents">
-							<th scope="row"><a ng-click="showModal([[event._id]])" data-toggle="modal">[[event.name]]</a></th>
+							<th scope="row"><a ng-click="showModal([[event._id]])" data-toggle="modal" style="cursor:pointer">[[event.name]]</a></th>
 							<td>[[event.date.string]]</td>
 							<td>[[event.location]]</td>
 							<td><span ng-show="event.registration.date.string">Register by [[event.registration.date.string]]<span></td>
-							<td>[[event.sponsors.join(", ")]]</td>
+							<td ng-bind-html="event.sponsors">[[event.sponsors.join(", ")]]</td>
 						</tr>
 					</tbody>
 				</table>
@@ -78,13 +83,24 @@
 							</div><!-- end modal header-->
 
 							<div class="modal-body">
-							<p ng-repeat="paragraph in event.description">[[paragraph]]</p> 
-							<p ng-repeat="paragraph in event.schedule">[[paragraph]]</p>
+							<p ng-repeat="paragraph in event.description" ng-bind-html="paragraph">[[paragraph]]</p> 
+							<p ng-repeat="paragraph in event.schedule" ng-bind-html="paragraph">[[paragraph]]</p>
 
 							</div><!-- end modal body-->
 
 							<div class="modal-footer">
-								<button class="btn btn-success" type="button">Register for this Event</button> <button class="btn btn-primary" data-dismiss="modal" type="button">Close</button>
+								<div ng-if="event.past" style="display:inline-block; color:red" class="pull-left">
+									<p>This event has passed.</p>
+								</div>
+								<button ng-show="event.externalLink" class="btn btn-default" type="button">
+									<a href="[[event.externalLink]]" target="_blank">
+										More Details <span class="glyphicon glyphicon-new-window"></span>
+									</a>
+								</button> 
+								<div ng-if="!event.past" style="display:inline-block">
+									<a href="[[event.registration.url]]" target="_blank" ng-show="event.registration.url"><button class="btn btn-success" type="button">Register for this Event</button></a>
+								</div>
+								<button class="btn btn-primary" data-dismiss="modal" type="button">Close</button>
 							</div><!-- end modal-footer -->
 						</div><!-- end modal content -->
 					</div><!-- end modal dialog --> 
@@ -101,11 +117,11 @@
 					</thead>		
 					<tbody>
 						<tr ng-repeat="event in externalEvents">
-							<th scope="row"><a ng-click="showModal([[event._id]])" data-toggle="modal">[[event.name]]</a></th>
+							<th scope="row"><a ng-click="showModal([[event._id]])" data-toggle="modal" style="cursor:pointer">[[event.name]]</a></th>
 							<td>[[event.date.string]]</td>
 							<td>[[event.location]]</td>
 							<td><span ng-show="event.registration.date.string">Register by [[event.registration.date.string]]<span></td>
-							<td>[[event.sponsors.join(", ")]]</td>
+							<td ng-bind-html="event.sponsors">[[event.sponsors.join(", ")]]</td>
 						</tr>
 					</tbody>
 				</table>
