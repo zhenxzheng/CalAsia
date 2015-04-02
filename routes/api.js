@@ -36,7 +36,7 @@ exports.upcomingEvents = function (req, res){
 	checkPastEvents();
 	models.Event
 		.find({past:false})
-		.sort('-date.full')
+		.sort('date.full')
 		.exec(renderEvents);
 	function renderEvents (err, events){
 		if(err) console.log(err);
@@ -58,7 +58,7 @@ exports.upcomingExternalEvents = function (req, res){
 	checkPastEvents();
 	models.Event
 		.find({eventType:'external',past:false})
-		.sort('-date.full')
+		.sort('date.full')
 		.exec(renderEvents);
 	function renderEvents (err, events){
 		if(err) console.log(err);
@@ -69,7 +69,7 @@ exports.upcomingInternalEvents = function (req, res){
 	checkPastEvents();
 	models.Event
 		.find({eventType:'internal',past:false})
-		.sort('-date.full')
+		.sort('date.full')
 		.exec(renderEvents);
 	function renderEvents (err, events){
 		if(err) console.log(err);
@@ -80,6 +80,7 @@ exports.yearEvents = function (req, res){
 	var year = req.params.year;
 	models.Event
 		.find({'year':year})
+		.sort('-date.full')
 		.exec(callback);
 	function callback(err,events){
 		if(err) console.log(err);
