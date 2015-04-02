@@ -62,7 +62,6 @@ exports.upcomingExternalEvents = function (req, res){
 		.exec(renderEvents);
 	function renderEvents (err, events){
 		if(err) console.log(err);
-		console.log(events);
 		res.json(events);
 	}
 }
@@ -74,7 +73,6 @@ exports.upcomingInternalEvents = function (req, res){
 		.exec(renderEvents);
 	function renderEvents (err, events){
 		if(err) console.log(err);
-		console.log(events);
 		res.json(events);
 	}
 }

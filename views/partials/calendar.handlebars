@@ -105,7 +105,7 @@
 							<td>[[event.date.string]]</td>
 							<td>[[event.location]]</td>
 							<td><span ng-show="event.registration.date.string">Register by [[event.registration.date.string]]<span></td>
-							<td>[[event.sponsors]]</td>
+							<td>[[event.sponsors.join(", ")]]</td>
 						</tr>
 					</tbody>
 				</table>
