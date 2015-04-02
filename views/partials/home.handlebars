@@ -91,8 +91,8 @@
           <div id="homeEvents">
             <h4><span class="glyphicon glyphicon-calendar"></span> Upcoming Cal-Asia and Partner Events <small><a href="/calendar">view all >></a></small></h4>
             <p style="padding: 0 30px;" ng-repeat="event in upcomingEvents">
-              [[event.date.string]]<br>
-              [[event.name]]<br> 
+              <strong>[[event.name]]</strong><br> 
+              <i>[[event.date.string]]</i><br>
               <span ng-show="event.description" ng-bind-html="event.description[0].substring(0,180).concat('...')">
               </span>
               <br>
