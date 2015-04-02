@@ -93,7 +93,8 @@
             <p style="padding: 0 30px;" ng-repeat="event in upcomingEvents">
               <strong>[[event.name]]</strong><br> 
               <i>[[event.date.string]]</i><br>
-              <span ng-show="event.description" ng-bind-html="event.description[0].substring(0,180).concat('...')">
+              <span ng-show="event.location">
+                [[event.location]]
               </span>
               <br>
               <a ng-click="showModal([[event._id]])" style="cursor:pointer">Details</a> | <a href="[[event.registration.url]]" target="_blank">Registration</a>
