@@ -180,6 +180,19 @@ exports.updates= function(req,res){
 		res.json(updates);
 	}
 }
+exports.oneUpdate=function(req,res){
+	var id = req.params.id;
+	models.Update
+		.findOne({'_id':id})
+		.exec(callback);
+	function callback(err,result){
+		if(err){
+			console.log(err);
+			res.json(false);
+		}
+		res.json({update:result});
+    }
+}
 exports.addUpdate = function (req, res){
 	var newUpdate = new models.Update(req.body);
 	newUpdate.save(afterSaving);

@@ -107,6 +107,7 @@ app.put('/api/event/:id', api.editEvent);
 app.delete('/api/events/:id', api.deleteEvent);
 
 app.get('/api/updates', api.updates);
+app.get('/api/update/:id', api.oneUpdate)
 app.post('/api/updates/new', api.addUpdate);
 app.put('/api/update/:id', api.editUpdate);
 app.delete('/api/updates/:id', api.deleteUpdate);

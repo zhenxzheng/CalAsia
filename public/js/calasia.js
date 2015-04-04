@@ -26,6 +26,9 @@ angular.module('calasia',['ngRoute','ngSanitize'])
 				templateUrl: 'partials/resources',
 				controller:"resourcesCtrl"
 			})
+			.when('/resources-orgs',{
+				templateUrl: 'partials/resources-orgs'
+			})
 			.when('/membership', {
 				templateUrl: 'partials/membership',
 				controller:"membershipCtrl"
@@ -404,8 +407,36 @@ angular.module('calasia',['ngRoute','ngSanitize'])
 			});
 		};
 	})
+	.controller("editUpdateCtrl", function ($scope, $http, $location, $routeParams){
+		$scope.form = {};
+		$scope.form.date = {};
+		$http.get('/api/update/' + $routeParams.id).
+		success(function(data) {
+			$scope.form = data.update;
+			if($scope.form.description != undefined) $scope.form.description = $scope.form.description.join("\r\r");
+			if($scope.form.date != undefined) $scope.form.date.full = new Date($scope.form.date.full);
+			else $scope.form.date = {};
+		});
+		
+		$scope.submitUpdate = function () {
+			if($scope.form.date.full || $scope.form.registration.date.full){
+				var monthArr = ["January","February","March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+				var weekdayArr = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+				if($scope.form.date.full){
+					$scope.form.date.string = weekdayArr[$scope.form.date.full.getDay()] +", "+monthArr[$scope.form.date.full.getMonth()]+" "+$scope.form.date.full.getDate()+", "+$scope.form.date.full.getFullYear();
+					$scope.form.year = $scope.form.date.full.getFullYear();
+				}
+			}
+			if ($scope.form.description!=undefined){
+				$scope.form.description = $scope.form.description.match(/^.+/mg);
+			}
+			$http.put('/api/update/' + $routeParams.id, $scope.form).
+				success(function(data) {
+					$location.url('/admin');
+				});
+		};
+	})
 	.controller("adminCtrl", function ($scope, $http, $timeout, $location, authenticationService){
-		console.log('test');
 		$http.get('/api/events').success(function(data, status, headers, config){
 			$scope.events = data;
 			$scope.eventCount = $scope.events.length;

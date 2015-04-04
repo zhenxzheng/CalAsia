@@ -81,7 +81,6 @@ thead {
   margin-right: 30px;
 }
 
-
 .well {
   color: black;
   font-size: 10px;
@@ -158,6 +157,12 @@ thead {
   margin-left: 40px;
 }
 
+#orgsBox {
+  margin-top: 20px;
+  margin-right: 40px;
+  margin-left: 40px;
+}
+
 footer{
   background-color: #1F1F1F;
   border-top: solid 5px #537368;
@@ -199,6 +204,7 @@ footer .col-md-4:last-child .footerContent{
   padding: 10px; 
   font-size: 8px;
 }
+
 
 
 /* --------------------------------------
@@ -292,6 +298,10 @@ body {
 }
 
 .carousel-caption {
+  left:0;
+  bottom:0;
+  width:100%;
+  padding:20px 50px 50px 50px;
   background-color: rgba(0, 0, 0, 0.4);
   background: rgba(0, 0, 0, 0.4);
   font-size: 12px;
@@ -300,15 +310,15 @@ body {
 #myCarousel .item { height: 400px; }
 
 #slide1 {
-  background: url('../img/carousel/A_AN14-large.jpg') top center no-repeat;
+  background: url('../img/carousel/A_featureVietnam.jpg') top center no-repeat;
 }
 
 #slide2 {
-  background: url('../img/carousel/B_CML-large.jpg') top center no-repeat;
+  background: url('../img/carousel/B_AN14-large.jpg') top center no-repeat;
 }
 
 #slide3 {
-  background: url('http://upload.wikimedia.org/wikipedia/commons/7/75/Bandovietnam-final-fill-scale.svg') center no-repeat;
+  background: url('../img/carousel/C_CML-large.jpg') top center no-repeat;
 }
 
 /* --------------------------------------
@@ -320,10 +330,7 @@ body {
   height: 300px;
 
 }
- .modal-body{
-    max-height:400px;
-    overflow-y:scroll;
-}
+
 
 /* --------------------------------------
    Media Queries
@@ -339,6 +346,7 @@ body {
    .navbar-nav li a {
    line-height: 30px;
    }
+
 }
 
 
@@ -363,14 +371,16 @@ body {
   .footerContent ul{
     margin: 0 !important;
   }
+
 }
 
 /* Large desktop */
 @media (max-width: 991px) {
    
-  .twitter-timeline {
-    width: 100% !important;
-  }
+.twitter-timeline {
+  width: 100% !important;
+}
+
 }
 
 
