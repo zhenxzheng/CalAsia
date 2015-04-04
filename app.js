@@ -106,6 +106,12 @@ app.post('/api/events/new', api.addEvent);
 app.put('/api/event/:id', api.editEvent);
 app.delete('/api/events/:id', api.deleteEvent);
 
+app.get('/api/updates', api.updates);
+app.post('/api/updates/new', api.addUpdate);
+app.put('/api/update/:id', api.editUpdate);
+app.delete('/api/updates/:id', api.deleteUpdate);
+
+
 app.post('/api/login', function (req, res) {
     var userName = req.body.userName;
     var password = req.body.password;

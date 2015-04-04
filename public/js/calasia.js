@@ -91,6 +91,37 @@ angular.module('calasia',['ngRoute','ngSanitize'])
 					}
 				}
 			})
+			.when('/addUpdate',{
+				templateUrl: 'partials/updateform',
+				controller:"addUpdateCtrl",
+				resolve:{
+					auth: function ($q, authenticationService, $location){
+						var userInfo = authenticationService.getUserInfo();
+						if (userInfo) {
+							return $q.when(userInfo);
+						}
+						else{
+							$location.path('/login');
+							return $q.reject({authenticated:false});
+						}
+					}
+				}
+			})
+			.when('/editUpdate/:id',{
+				templateUrl:'partials/updateform',
+				controller:"editUpdateCtrl",
+				resolve:{
+					auth: function ($q, authenticationService){
+						var userInfo = authenticationService.getUserInfo();
+						if (userInfo) {
+							return $q.when(userInfo);
+						}
+						else{
+							return $q.reject({authenticated:false});
+						}
+					}
+				}
+			})
 			.otherwise({
 		      redirectTo: '/'
 		    });
@@ -134,6 +165,12 @@ angular.module('calasia',['ngRoute','ngSanitize'])
 				data.push({name:"No Upcoming Events"});
 			}
 			$scope.upcomingEvents = data.slice(0,2);
+		})
+		$http.get("/api/updates").success(function(data, status, headers, config){
+			if(data.length==0){
+				data.push({title:"No New Updates"});
+			}
+			$scope.updates = data.slice(0,2);
 		})
 		$scope.showModal = function (id){
 			var selector = "#"+id;
@@ -342,10 +379,40 @@ angular.module('calasia',['ngRoute','ngSanitize'])
 				});
 		};
 	})
+	.controller("addUpdateCtrl",function ($scope, $http, $location){
+		$scope.form = {};
+		$scope.form.date = {};
+		(function(){
+			$scope.form.date.full = new Date();
+		})();
+		$scope.submitUpdate = function () {
+			if($scope.form.date.full || $scope.form.registration.date.full){
+				var monthArr = ["January","February","March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+				var weekdayArr = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+				if($scope.form.date.full){
+					$scope.form.date.string = weekdayArr[$scope.form.date.full.getDay()] +", "+monthArr[$scope.form.date.full.getMonth()]+" "+$scope.form.date.full.getDate()+", "+$scope.form.date.full.getFullYear();
+					$scope.form.year = $scope.form.date.full.getFullYear();
+				}
+			}
+			if ($scope.form.description!=undefined){
+				$scope.form.description = $scope.form.description.match(/^.+/mg);
+			}
+			$http.post('/api/updates/new', $scope.form).
+			  success(function(data) {
+			  	alert("Update added");
+			  	$location.path('/admin');
+			});
+		};
+	})
 	.controller("adminCtrl", function ($scope, $http, $timeout, $location, authenticationService){
+		console.log('test');
 		$http.get('/api/events').success(function(data, status, headers, config){
 			$scope.events = data;
-			$scope.count = $scope.events.length;
+			$scope.eventCount = $scope.events.length;
+		})
+		$http.get('/api/updates').success(function(data, status, headers, config){
+			$scope.updates = data;
+			$scope.updateCount = $scope.updates.length;
 		})
 		$scope.showModal = function (id){
 			var selector = "#"+id;
@@ -354,10 +421,20 @@ angular.module('calasia',['ngRoute','ngSanitize'])
 		$scope.deleteEvent = function(id){
 		    var current = "."+id;
 		    if(confirm("Are you sure you want to delete this event?")==true){
-		      $http.delete('api/events/'+id)
+				$http.delete('api/events/'+id)
+					.success(function(data){
+						$(current).fadeOut("fast");
+						$scope.eventCount--;
+				})
+		    }
+		}
+		$scope.deleteUpdate = function(id){
+		    var current = "."+id;
+		    if(confirm("Are you sure you want to delete this update?")==true){
+		      $http.delete('api/updates/'+id)
 		        .success(function(data){
-		          $(current).fadeOut("fast");
-		          $scope.count--;
+					$(current).fadeOut("fast");
+					$scope.updateCount--;
 		        })
 		    }
 		}

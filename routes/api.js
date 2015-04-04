@@ -171,7 +171,60 @@ exports.deleteEvent = function (req, res){
 		res.json(true);
 	}
 }
-
+exports.updates= function(req,res){
+	models.Update
+		.find()
+		.sort('-date.full')
+		.exec(renderUpdate);
+	function renderUpdate (err, updates){
+		res.json(updates);
+	}
+}
+exports.addUpdate = function (req, res){
+	var newUpdate = new models.Update(req.body);
+	newUpdate.save(afterSaving);
+	function afterSaving(err){
+		if(err){
+			console.log(err);
+			res.send(500);
+		}
+		res.json(newUpdate);
+	}
+}
+exports.editUpdate = function (req, res){
+	var id = req.params.id
+	models.Update
+		.findOne({'_id':id})
+		.exec(callback);
+	function callback(err, result){
+		if(err) console.log(err);
+	    if(!result) res.json(false);
+	    else{
+			result.title = req.body.title;
+			result.date.full = req.body.date.full;
+			result.date.string = req.body.date.string;
+			result.description = req.body.description;
+			result.save(function(err){
+				if(err) res.send(500);
+				res.json(true);
+			});
+	    }
+	}
+}
+exports.deleteUpdate = function (req, res){
+	var id = req.params.id
+	models.Update
+		.findOne({'_id':id})
+		.remove()
+		.exec(afterRemove);
+	function afterRemove(err, event){
+		if(err){
+			console.log(err);
+			res.json(false);
+		}
+		res.json(true);
+	}
+}
 function checkPastEvents(){
 	models.Event
 		.find({past:false})

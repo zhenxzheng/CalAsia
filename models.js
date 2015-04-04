@@ -33,3 +33,13 @@ var EventSchema = new mongoose.Schema({
 	past:Boolean
 })
 exports.Event = mongoose.model('Event',EventSchema);
+
+var UpdateSchema = new mongoose.Schema({
+	title:String,//
+	date:{//
+		full:Date,
+		string:String,
+	},
+	description:[String]
+})
+exports.Update = mongoose.model('Update',UpdateSchema);

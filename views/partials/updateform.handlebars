@@ -1,0 +1,26 @@
+<form style="background:white;color:#777">
+  <div class="row">
+    <h2 class="col-md-12 text-center">
+      Update
+    </h2>
+  </div>
+  <div>
+    <div style="padding:10px">
+      <h4>Update Title:</h4>
+      <input class="form-control" ng-model="form.title" style="width:100%" placeholder="Update Title">
+    </div>
+    <div style="display:inline-block; padding:10px; width:33%">
+      <h4> Date:</h4>
+      <input class="form-control" type="date" style="width:100%" ng-model="form.date.full">
+    </div>
+  </div>
+  <div style="padding:10px">
+    <h4> Description:</h4>
+    <textarea class="form-control" style="width:100%; height:20em" ng-model="form.description"></textarea>
+    <div style="margin-top:1em" class="text-center">
+      <a style="display:inline-block">
+        <button class="btn btn-primary" ng-click="submitUpdate()">Submit Update</button>
+      </a>
+    </div>
+  </div>
+</form>

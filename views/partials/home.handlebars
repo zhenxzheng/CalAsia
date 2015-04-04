@@ -103,20 +103,35 @@
         </div><!-- end col-md-8 leftColumn --> 
 
         <div class="col-md-4" id="rightColumn">
+          <!-- 3 News & Updates -->  
+          <div class="modal fade" id="[[update._id]]" ng-repeat="update in updates">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button class="close" data-dismiss="modal">&times;</button>
 
-          <!-- 3 News & Updates -->   
+                  <h4 class="modal-title">[[update.title]]</h4>
+                  <h5>Date: [[update.date.string]]</h5>
+                </div><!-- end modal header-->
+
+                <div class="modal-body">
+                <p ng-repeat="paragraph in update.description" ng-bind-html="paragraph">[[paragraph]]</p>
+
+                </div><!-- end modal body-->
+
+                <div class="modal-footer">
+                  <button class="btn btn-primary" data-dismiss="modal" type="button">Close</button>
+                </div><!-- end modal-footer -->
+              </div><!-- end modal content -->
+            </div><!-- end modal dialog --> 
+          </div><!--end modal fade -->  
           <div id="homeUpdates"> 
             <h4><span class="glyphicon glyphicon-asterisk"></span> News and Updates</h4>
-            <p style="padding: 0 30px;">
-              Update 1<br> 
-              Description<br>
-              <a href="#">Read More >></a><br>
-              </p>
-
-              <p style="padding: 0 30px;">
-                Update 2<br>
-                Description<br>
-                <a href="#">Read More >></a><br>
+            <p ng-repeat="update in updates" style="padding: 0 30px;">
+              <strong>[[update.title]]</strong><br>
+              <i>[[update.date.string]]</i><br>
+              <span ng-bind-html="update.description[0]"></span><br>
+              <a ng-click="showModal([[update._id]])" style="cursor:pointer">Read More >></a>
             </p>
            </div><!-- end homeUpdates -->
 
