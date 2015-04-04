@@ -129,9 +129,11 @@
             <h4><span class="glyphicon glyphicon-asterisk"></span> News and Updates</h4>
             <p ng-repeat="update in updates" style="padding: 0 30px;">
               <strong>[[update.title]]</strong><br>
-              <i>[[update.date.string]]</i><br>
-              <span ng-bind-html="update.description[0]"></span><br>
-              <a ng-click="showModal([[update._id]])" style="cursor:pointer">Read More >></a>
+              <span ng-if="update.description">
+                <i>[[update.date.string]]</i><br>
+                <span ng-bind-html="update.description[0]"></span><br>
+                <a ng-click="showModal([[update._id]])" style="cursor:pointer">Read More >></a>
+              </span>
             </p>
            </div><!-- end homeUpdates -->
 

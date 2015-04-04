@@ -168,7 +168,7 @@ angular.module('calasia',['ngRoute','ngSanitize'])
 		})
 		$http.get("/api/updates").success(function(data, status, headers, config){
 			if(data.length==0){
-				data.push({title:"No New Updates"});
+				data.push({title:"No Updates"});
 			}
 			$scope.updates = data.slice(0,2);
 		})
