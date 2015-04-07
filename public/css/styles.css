@@ -162,7 +162,10 @@ thead {
   margin-right: 40px;
   margin-left: 40px;
 }
-
+.modal-body{
+  max-height:400px;
+  overflow-y:scroll;
+}
 footer{
   background-color: #1F1F1F;
   border-top: solid 5px #537368;

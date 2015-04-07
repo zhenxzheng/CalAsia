@@ -247,6 +247,8 @@ angular.module('calasia',['ngRoute','ngSanitize'])
 		}
 	})
 	.controller("addEventCtrl",function ($scope, $http, $location){
+		$('#editor').wysiwyg();
+		$('#editor').cleanHtml();
 		$scope.form = {};
 		$scope.form.date = {};
 		$scope.form.eventTime = {};
@@ -285,11 +287,8 @@ angular.module('calasia',['ngRoute','ngSanitize'])
 			if($scope.form.speakers!=undefined) $scope.form.speakers = $scope.form.speakers.split(/, */);
 			if($scope.form.sponsors!=undefined) $scope.form.sponsors = $scope.form.sponsors.split(/, */);
 
-			if ($scope.form.description!=undefined){
-				$scope.form.description = $scope.form.description.match(/^.+/mg);
-			}
-			if ($scope.form.schedule!=undefined){
-				$scope.form.schedule = $scope.form.schedule.match(/^.+/mg);
+			if ($('#editor') !=undefined){
+				$scope.form.description = $('#editor').html();
 			}
 			if($scope.form.eventTime.full){
 				var hours = $scope.form.eventTime.full.getHours();
@@ -309,6 +308,8 @@ angular.module('calasia',['ngRoute','ngSanitize'])
 		};
 	})
 	.controller("editEventCtrl", function ($scope, $http, $location, $routeParams){
+		$('#editor').wysiwyg();
+		$('#editor').cleanHtml();
 		$('#internal, #external').click(function(){
 			if($('#external').prop('checked') == true) $('#externalLink').prop('disabled', false);
 		    else $('#externalLink').prop('disabled', true);
@@ -321,7 +322,7 @@ angular.module('calasia',['ngRoute','ngSanitize'])
 		$http.get('/api/event/' + $routeParams.id).
 		success(function(data) {
 			$scope.form = data.event;
-			if($scope.form.description != undefined) $scope.form.description = $scope.form.description.join("\r\r");
+			if($scope.form.description != undefined) $('#editor').append($scope.form.description);
 			if($scope.form.schedule != undefined) $scope.form.schedule = $scope.form.schedule.join("\r\r");
 			if($scope.form.speakers!=undefined) $scope.form.speakers = $scope.form.speakers.join(", ");
 			if($scope.form.sponsors!=undefined) $scope.form.sponsors = $scope.form.sponsors.join(", ");
@@ -360,11 +361,8 @@ angular.module('calasia',['ngRoute','ngSanitize'])
 			if($scope.form.speakers!=undefined) $scope.form.speakers = $scope.form.speakers.split(/, */);
 			if($scope.form.sponsors!=undefined) $scope.form.sponsors = $scope.form.sponsors.split(/, */);
 
-			if ($scope.form.description!=undefined){
-				$scope.form.description = $scope.form.description.match(/^.+/mg);
-			}
-			if ($scope.form.schedule!=undefined){
-				$scope.form.schedule = $scope.form.schedule.match(/^.+/mg);
+			if ($('#editor') !=undefined){
+				$scope.form.description = $('#editor').html();
 			}
 			if($scope.form.eventTime.full){
 				var hours = $scope.form.eventTime.full.getHours();
@@ -383,6 +381,8 @@ angular.module('calasia',['ngRoute','ngSanitize'])
 		};
 	})
 	.controller("addUpdateCtrl",function ($scope, $http, $location){
+		$('#editor').wysiwyg();
+		$('#editor').cleanHtml();
 		$scope.form = {};
 		$scope.form.date = {};
 		(function(){
@@ -408,12 +408,14 @@ angular.module('calasia',['ngRoute','ngSanitize'])
 		};
 	})
 	.controller("editUpdateCtrl", function ($scope, $http, $location, $routeParams){
+		$('#editor').wysiwyg();
+		$('#editor').cleanHtml();
 		$scope.form = {};
 		$scope.form.date = {};
 		$http.get('/api/update/' + $routeParams.id).
 		success(function(data) {
 			$scope.form = data.update;
-			if($scope.form.description != undefined) $scope.form.description = $scope.form.description.join("\r\r");
+			if($scope.form.description != undefined) $('#editor').append($scope.form.description);
 			if($scope.form.date != undefined) $scope.form.date.full = new Date($scope.form.date.full);
 			else $scope.form.date = {};
 		});
@@ -427,8 +429,8 @@ angular.module('calasia',['ngRoute','ngSanitize'])
 					$scope.form.year = $scope.form.date.full.getFullYear();
 				}
 			}
-			if ($scope.form.description!=undefined){
-				$scope.form.description = $scope.form.description.match(/^.+/mg);
+			if ($('#editor') !=undefined){
+				$scope.form.description = $('#editor').html();
 			}
 			$http.put('/api/update/' + $routeParams.id, $scope.form).
 				success(function(data) {
@@ -437,14 +439,31 @@ angular.module('calasia',['ngRoute','ngSanitize'])
 		};
 	})
 	.controller("adminCtrl", function ($scope, $http, $timeout, $location, authenticationService){
-		$http.get('/api/events').success(function(data, status, headers, config){
+		$http.get('/api/events/2015').success(function(data, status, headers, config){
 			$scope.events = data;
 			$scope.eventCount = $scope.events.length;
+			$scope.year = "2015";
 		})
 		$http.get('/api/updates').success(function(data, status, headers, config){
 			$scope.updates = data;
 			$scope.updateCount = $scope.updates.length;
 		})
+		$scope.showYear =function(year){
+			console.log(year);
+			if (year == 'All'){
+				$http.get('/api/events').success(function(data, status, headers, config){
+					$scope.events = data;
+					$scope.eventCount = $scope.events.length;
+				})
+			}
+			else {
+				$http.get('/api/events/'+year).success(function(data, status, headers, config){
+					$scope.events = data;
+					$scope.eventCount = $scope.events.length;
+				})
+			}
+			$scope.year = year;
+		}
 		$scope.showModal = function (id){
 			var selector = "#"+id;
 			$(selector).modal('show');
