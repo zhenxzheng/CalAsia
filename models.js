@@ -21,7 +21,6 @@ var EventSchema = new mongoose.Schema({
 	memberPrice:Number,
 	sponsors:[String],
 	regLink:String,
-	schedule:String,
 	registration:{
 		url:String,
 		date:{

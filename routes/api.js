@@ -144,7 +144,6 @@ exports.editEvent = function (req, res){
 			result.memberPrice = req.body.memberPrice;
 			result.sponsors = req.body.sponsors;
 			result.regLink = req.body.regLink;
-			result.schedule = req.body.schedule;
 			result.registration.url = req.body.registration.url;
 			result.registration.date.full = req.body.registration.date.full;
 			result.registration.date.string = req.body.registration.date.string;

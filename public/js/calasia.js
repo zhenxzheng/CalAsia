@@ -323,7 +323,6 @@ angular.module('calasia',['ngRoute','ngSanitize'])
 		success(function(data) {
 			$scope.form = data.event;
 			if($scope.form.description != undefined) $('#editor').append($scope.form.description);
-			if($scope.form.schedule != undefined) $scope.form.schedule = $scope.form.schedule.join("\r\r");
 			if($scope.form.speakers!=undefined) $scope.form.speakers = $scope.form.speakers.join(", ");
 			if($scope.form.sponsors!=undefined) $scope.form.sponsors = $scope.form.sponsors.join(", ");
 			if($scope.form.image!=undefined) $scope.form.image = $scope.form.image.join(", ");
