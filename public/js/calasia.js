@@ -139,13 +139,6 @@ angular.module('calasia',['ngRoute','ngSanitize'])
 					data.push({name:"No Events"});
 				}
 				$scope.events = data;
-				// $scope.events.forEach(function(item, i){
-				// 	console.log(item);
-				// 	item.description.forEach(function (paragraph){
-				// 		console.log(paragraph);
-				// 		paragraph = $.parseHTML(paragraph);
-				// 	})
-				// })
 			})
 		}
 		else{
