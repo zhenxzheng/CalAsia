@@ -33,6 +33,10 @@ angular.module('calasia',['ngRoute','ngSanitize'])
 				templateUrl: 'partials/membership',
 				controller:"membershipCtrl"
 			})
+			.when('/blog', {
+				templateUrl: 'partials/blog',
+				controller:"blogCtrl"
+			})
 			.when('/contact',{
 				templateUrl: 'partials/contact'
 			})
@@ -113,6 +117,37 @@ angular.module('calasia',['ngRoute','ngSanitize'])
 			.when('/editUpdate/:id',{
 				templateUrl:'partials/updateform',
 				controller:"editUpdateCtrl",
+				resolve:{
+					auth: function ($q, authenticationService){
+						var userInfo = authenticationService.getUserInfo();
+						if (userInfo) {
+							return $q.when(userInfo);
+						}
+						else{
+							return $q.reject({authenticated:false});
+						}
+					}
+				}
+			})
+			.when('/addBlog',{
+				templateUrl: 'partials/blogform',
+				controller:"addBlogCtrl",
+				resolve:{
+					auth: function ($q, authenticationService, $location){
+						var userInfo = authenticationService.getUserInfo();
+						if (userInfo) {
+							return $q.when(userInfo);
+						}
+						else{
+							$location.path('/login');
+							return $q.reject({authenticated:false});
+						}
+					}
+				}
+			})
+			.when('/editBlog/:id',{
+				templateUrl:'partials/blogform',
+				controller:"editBlogCtrl",
 				resolve:{
 					auth: function ($q, authenticationService){
 						var userInfo = authenticationService.getUserInfo();
@@ -377,20 +412,15 @@ angular.module('calasia',['ngRoute','ngSanitize'])
 		$('#editor').cleanHtml();
 		$scope.form = {};
 		$scope.form.date = {};
-		(function(){
-			$scope.form.date.full = new Date();
-		})();
 		$scope.submitUpdate = function () {
-			if($scope.form.date.full || $scope.form.registration.date.full){
+			if($scope.form.date.full){
 				var monthArr = ["January","February","March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 				var weekdayArr = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-				if($scope.form.date.full){
-					$scope.form.date.string = weekdayArr[$scope.form.date.full.getDay()] +", "+monthArr[$scope.form.date.full.getMonth()]+" "+$scope.form.date.full.getDate()+", "+$scope.form.date.full.getFullYear();
-					$scope.form.year = $scope.form.date.full.getFullYear();
-				}
+				$scope.form.date.string = weekdayArr[$scope.form.date.full.getDay()] +", "+monthArr[$scope.form.date.full.getMonth()]+" "+$scope.form.date.full.getDate()+", "+$scope.form.date.full.getFullYear();
+				$scope.form.year = $scope.form.date.full.getFullYear();
 			}
-			if ($scope.form.description!=undefined){
-				$scope.form.description = $scope.form.description.match(/^.+/mg);
+			if ($('#editor') !=undefined){
+				$scope.form.description = $('#editor').html();
 			}
 			$http.post('/api/updates/new', $scope.form).
 			  success(function(data) {
@@ -408,23 +438,94 @@ angular.module('calasia',['ngRoute','ngSanitize'])
 		success(function(data) {
 			$scope.form = data.update;
 			if($scope.form.description != undefined) $('#editor').append($scope.form.description);
-			if($scope.form.date != undefined) $scope.form.date.full = new Date($scope.form.date.full);
+			if($scope.form.date != undefined){
+				if($scope.form.date.full != undefined){
+					$scope.form.date.full = new Date($scope.form.date.full);
+				}
+			}
 			else $scope.form.date = {};
 		});
 		
 		$scope.submitUpdate = function () {
-			if($scope.form.date.full || $scope.form.registration.date.full){
+			console.log($scope.form.date.full);
+			if($scope.form.date.full){
 				var monthArr = ["January","February","March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 				var weekdayArr = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-				if($scope.form.date.full){
-					$scope.form.date.string = weekdayArr[$scope.form.date.full.getDay()] +", "+monthArr[$scope.form.date.full.getMonth()]+" "+$scope.form.date.full.getDate()+", "+$scope.form.date.full.getFullYear();
-					$scope.form.year = $scope.form.date.full.getFullYear();
-				}
+				$scope.form.date.string = weekdayArr[$scope.form.date.full.getDay()] +", "+monthArr[$scope.form.date.full.getMonth()]+" "+$scope.form.date.full.getDate()+", "+$scope.form.date.full.getFullYear();
+				$scope.form.year = $scope.form.date.full.getFullYear();
+			}
+			else {
+				$scope.form.date.string = null;
+				$scope.form.year = null;
 			}
 			if ($('#editor') !=undefined){
 				$scope.form.description = $('#editor').html();
 			}
 			$http.put('/api/update/' + $routeParams.id, $scope.form).
+				success(function(data) {
+					$location.url('/admin');
+				});
+		};
+	})
+	.controller("blogCtrl", function ($scope, $http){
+		$http.get('api/blogs').success(function(data){
+			$scope.blogs = data.blogs;
+		})
+	})
+	.controller("addBlogCtrl",function ($scope, $http, $location){
+		$('#editor').wysiwyg();
+		$('#editor').cleanHtml();
+		$scope.form = {};
+		$scope.form.date = {};
+		$scope.submitBlog = function () {
+			if($scope.form.date.full){
+				var monthArr = ["January","February","March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+				var weekdayArr = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+				$scope.form.date.string = weekdayArr[$scope.form.date.full.getDay()] +", "+monthArr[$scope.form.date.full.getMonth()]+" "+$scope.form.date.full.getDate()+", "+$scope.form.date.full.getFullYear();
+				$scope.form.year = $scope.form.date.full.getFullYear();
+			}
+			if ($('#editor') !=undefined){
+				$scope.form.text = $('#editor').html();
+			}
+			$http.post('/api/blogs/new', $scope.form).
+			  success(function(data) {
+			  	alert("Blog added");
+			  	$location.path('/admin');
+			});
+		};
+	})
+	.controller("editBlogCtrl", function ($scope, $http, $location, $routeParams){
+		$('#editor').wysiwyg();
+		$('#editor').cleanHtml();
+		$scope.form = {};
+		$scope.form.date = {};
+		$http.get('/api/blog/' + $routeParams.id).
+		success(function(data) {
+			$scope.form = data.blog;
+			if($scope.form.text != undefined) $('#editor').append($scope.form.text);
+			if($scope.form.date != undefined){
+				if($scope.form.date.full != undefined){
+					$scope.form.date.full = new Date($scope.form.date.full);
+				}
+			}
+			else $scope.form.date = {};
+		});
+		$scope.submitBlog = function () {
+			console.log($scope.form.date.full);
+			if($scope.form.date.full){
+				var monthArr = ["January","February","March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+				var weekdayArr = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+				$scope.form.date.string = weekdayArr[$scope.form.date.full.getDay()] +", "+monthArr[$scope.form.date.full.getMonth()]+" "+$scope.form.date.full.getDate()+", "+$scope.form.date.full.getFullYear();
+				$scope.form.year = $scope.form.date.full.getFullYear();
+			}
+			else {
+				$scope.form.date.string = null;
+				$scope.form.year = null;
+			}
+			if ($('#editor') !=undefined){
+				$scope.form.text = $('#editor').html();
+			}
+			$http.put('/api/blog/' + $routeParams.id, $scope.form).
 				success(function(data) {
 					$location.url('/admin');
 				});
@@ -439,6 +540,10 @@ angular.module('calasia',['ngRoute','ngSanitize'])
 		$http.get('/api/updates').success(function(data, status, headers, config){
 			$scope.updates = data;
 			$scope.updateCount = $scope.updates.length;
+		})
+		$http.get('/api/blogs').success(function(data, status, headers, config){
+			$scope.blogs = data;
+			$scope.blogCount = $scope.blogs.length;
 		})
 		$scope.showYear =function(year){
 			console.log(year);
@@ -477,6 +582,16 @@ angular.module('calasia',['ngRoute','ngSanitize'])
 		        .success(function(data){
 					$(current).fadeOut("fast");
 					$scope.updateCount--;
+		        })
+		    }
+		}
+		$scope.deleteBlog = function(id){
+		    var current = "."+id;
+		    if(confirm("Are you sure you want to delete this blog entry?")==true){
+		      $http.delete('api/blogs/'+id)
+		        .success(function(data){
+					$(current).fadeOut("fast");
+					$scope.blogCount--;
 		        })
 		    }
 		}

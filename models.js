@@ -39,6 +39,16 @@ var UpdateSchema = new mongoose.Schema({
 		full:Date,
 		string:String,
 	},
-	description:[String]
+	description:String
 })
 exports.Update = mongoose.model('Update',UpdateSchema);
+
+var BlogSchema = new mongoose.Schema({
+	title:String,//
+	date:{//
+		full:Date,
+		string:String,
+	},
+	text:String
+})
+exports.Blog = mongoose.model('Blog',BlogSchema);

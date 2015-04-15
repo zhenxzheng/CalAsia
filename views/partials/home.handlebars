@@ -110,7 +110,7 @@
                   <button class="close" data-dismiss="modal">&times;</button>
 
                   <h4 class="modal-title">[[update.title]]</h4>
-                  <h5>Date: [[update.date.string]]</h5>
+                  <h5 ng-if="update.date.string">Date: [[update.date.string]]</h5>
                 </div><!-- end modal header-->
 
                 <div class="modal-body">
@@ -129,7 +129,7 @@
             <p ng-repeat="update in updates" style="padding: 0 30px;">
               <strong>[[update.title]]</strong><br>
               <span ng-if="update.description">
-                <i>[[update.date.string]]</i><br>
+                <i ng-if="update.date.string">[[update.date.string]]</i><br ng-if="update.date.string">
                 <span ng-bind-html="update.description[0]"></span><br>
                 <a ng-click="showModal([[update._id]])" style="cursor:pointer">Read More >></a>
               </span>
