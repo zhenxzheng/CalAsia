@@ -130,7 +130,7 @@
               <strong>[[update.title]]</strong><br>
               <span ng-if="update.description">
                 <i ng-if="update.date.string">[[update.date.string]]</i><br ng-if="update.date.string">
-                <span ng-bind-html="update.description[0]"></span><br>
+                <span ng-bind-html="update.description"></span><br>
                 <a ng-click="showModal([[update._id]])" style="cursor:pointer">Read More >></a>
               </span>
             </p>
