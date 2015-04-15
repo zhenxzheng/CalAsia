@@ -22,14 +22,13 @@ body{
 #missionBox{
   background: #862600;
   color: #fff;
-  height: 50px;
   border-bottom-width: 10px;
   border-bottom-color: #B15000;
   border-bottom-style: solid;
 }
 
 #mission-text{
-  padding-top: 6px;
+  margin:15px auto;
 }
 
 #bodyDiv {
@@ -206,14 +205,35 @@ footer .col-md-4:last-child .footerContent{
 
 }
 
-#copyright {
+
+#copyright,#subscribe {
   text-align: center;
   background-color: #862600;
   color: white;
   padding: 10px; 
   font-size: 8px;
 }
-
+#subscribe{
+  background-color: #826826;
+  padding:5px;
+}
+#subscribe p{
+  display:inline-block;
+  font-size:12px;
+  padding:5px 10px;
+  border:solid 1px;
+  margin:0 auto;
+  -ms-transition: all 0.2s ease;
+  -webkit-transition: all 0.2s ease;
+  -moz-transition: all 0.2s ease;
+  -o-transition: all 0.2s ease;
+  transition: all 0.2s ease;
+}
+#subscribe p:hover{
+  background-color:white;
+  border-color:white;
+  color:chocolate;
+}
 
 
 /* --------------------------------------
@@ -392,5 +412,24 @@ body {
 
 }
 
-
-
+.ease{
+  -ms-transition: all 0.2s ease;
+  -webkit-transition: all 0.2s ease;
+  -moz-transition: all 0.2s ease;
+  -o-transition: all 0.2s ease;
+  transition: all 0.2s ease;
+}
+.easein{
+  -ms-transition: all 0.2s ease-in;
+  -webkit-transition: all 0.2s ease-in;
+  -moz-transition: all 0.2s ease-in;
+  -o-transition: all 0.2s ease-in;
+  transition: all 0.2s ease-in;
+}
+.easeout{
+  -ms-transition: all 0.2s ease-out;
+  -webkit-transition: all 0.2s ease-out;
+  -moz-transition: all 0.2s ease-out;
+  -o-transition: all 0.2s ease-out;
+  transition: all 0.2s ease-out;
+}
