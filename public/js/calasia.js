@@ -196,6 +196,13 @@ angular.module('calasia',['ngRoute','ngSanitize'])
 				data.push({name:"No Upcoming Events"});
 			}
 			$scope.upcomingEvents = data.slice(0,2);
+			var today = new Date();
+			$scope.upcomingEvents.forEach(function(item, i){
+				item.countDown = Math.floor((new Date(item.date.full) - today)/86400000);
+				if(item.countDown == 0) item.countDown = 'Today';
+				else if (item.countDown == 1) item.countDown = 'Tomorrow';
+				else item.countDown = 'In '+item.countDown+' Days';
+			})
 		})
 		$http.get("/api/updates").success(function(data, status, headers, config){
 			if(data.length==0){
@@ -302,10 +309,12 @@ angular.module('calasia',['ngRoute','ngSanitize'])
 				var weekdayArr = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 				if($scope.form.date.full){
 					$scope.form.date.string = weekdayArr[$scope.form.date.full.getDay()] +", "+monthArr[$scope.form.date.full.getMonth()]+" "+$scope.form.date.full.getDate()+", "+$scope.form.date.full.getFullYear();
+					$scope.form.date.full = new Date($scope.form.date.string + ' 11:59 PM');
 					$scope.form.year = $scope.form.date.full.getFullYear();
 				}
 				if($scope.form.registration.date.full){
-					$scope.form.registration.date.string = weekdayArr[$scope.form.registration.date.full.getDay()] +", "+monthArr[$scope.form.registration.date.full.getMonth()]+" "+$scope.form.registration.date.full.getDate()+", "+$scope.form.registration.date.full.getFullYear();	
+					$scope.form.registration.date.string = weekdayArr[$scope.form.registration.date.full.getDay()] +", "+monthArr[$scope.form.registration.date.full.getMonth()]+" "+$scope.form.registration.date.full.getDate()+", "+$scope.form.registration.date.full.getFullYear();
+					$scope.form.registration.date.full = new Date($scope.form.registration.date.string + ' 11:59 PM');
 				}
 			}
 			if($scope.form.registration.url != undefined){
@@ -326,6 +335,7 @@ angular.module('calasia',['ngRoute','ngSanitize'])
 				hours = hours ? hours : 12;
 				minutes = minutes < 10 ? '0'+minutes : minutes;
 				$scope.form.eventTime.string = hours + ':' + minutes + ' ' + AMPM;
+				$scope.form.date.full = new Date($scope.form.date.string + ' ' +$scope.form.eventTime.string);
 			}
 			$scope.form.past = new Date > $scope.form.date.full;
 			$http.post('/api/events/new', $scope.form).
@@ -375,10 +385,12 @@ angular.module('calasia',['ngRoute','ngSanitize'])
 				var weekdayArr = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 				if($scope.form.date.full){
 					$scope.form.date.string = weekdayArr[$scope.form.date.full.getDay()] +", "+monthArr[$scope.form.date.full.getMonth()]+" "+$scope.form.date.full.getDate()+", "+$scope.form.date.full.getFullYear();
+					$scope.form.date.full = new Date($scope.form.date.string + ' 11:59 PM');
 					$scope.form.year = $scope.form.date.full.getFullYear();
 				}
 				if($scope.form.registration.date.full){
-					$scope.form.registration.date.string = weekdayArr[$scope.form.registration.date.full.getDay()] +", "+monthArr[$scope.form.registration.date.full.getMonth()]+" "+$scope.form.registration.date.full.getDate()+", "+$scope.form.registration.date.full.getFullYear();	
+					$scope.form.registration.date.string = weekdayArr[$scope.form.registration.date.full.getDay()] +", "+monthArr[$scope.form.registration.date.full.getMonth()]+" "+$scope.form.registration.date.full.getDate()+", "+$scope.form.registration.date.full.getFullYear();
+					$scope.form.registration.date.full = new Date($scope.form.registration.date.string + ' 11:59 PM');
 				}
 			}
 			if($scope.form.registration.url != undefined){
@@ -399,6 +411,7 @@ angular.module('calasia',['ngRoute','ngSanitize'])
 				hours = hours ? hours : 12;
 				minutes = minutes < 10 ? '0'+minutes : minutes;
 				$scope.form.eventTime.string = hours + ':' + minutes + ' ' + AMPM;
+				$scope.form.date.full = new Date($scope.form.date.string + ' ' +$scope.form.eventTime.string);
 			}
 			$scope.form.past = new Date > $scope.form.date.full;
 			$http.put('/api/event/' + $routeParams.id, $scope.form).

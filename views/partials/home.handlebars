@@ -91,7 +91,7 @@
             <h4><span class="glyphicon glyphicon-calendar"></span> Upcoming Cal-Asia and Partner Events <small><a href="/calendar">view all >></a></small></h4>
             <p style="padding: 0 30px;" ng-repeat="event in upcomingEvents">
               <strong>[[event.name]]</strong><br> 
-              <i>[[event.date.string]]</i><br>
+              <i>[[event.date.string]]</i><span style="color:gray"> - [[event.countDown]]</span><br>
               <span ng-show="event.location">
                 [[event.location]]
               </span>
