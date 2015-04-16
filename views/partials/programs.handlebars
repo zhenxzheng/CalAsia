@@ -99,11 +99,11 @@
 									<div ng-if="event.past" style="display:inline-block; color:red" class="pull-left">
 										<p>This event has passed.</p>
 									</div>
-									<button ng-show="event.externalLink" class="btn btn-default" type="button">
-										<a href="[[event.externalLink]]" target="_blank">
+									<a href="[[event.externalLink]]" target="_blank">
+										<button ng-show="event.externalLink" class="btn btn-default" type="button">
 											More Details <span class="glyphicon glyphicon-new-window"></span>
-										</a>
-									</button> 
+										</button>
+									</a>
 									<div ng-if="!event.past" style="display:inline-block">
 										<a href="[[event.registration.url]]" target="_blank" ng-show="event.registration.url"><button class="btn btn-success" type="button">Register for this Event</button></a>
 									</div>
