@@ -196,9 +196,9 @@ angular.module('calasia',['ngRoute','ngSanitize'])
 				data.push({name:"No Upcoming Events"});
 			}
 			$scope.upcomingEvents = data.slice(0,2);
-			var today = new Date();
+			var day = new Date().getDate();
 			$scope.upcomingEvents.forEach(function(item, i){
-				item.countDown = Math.floor((new Date(item.date.full) - today)/86400000);
+				item.countDown = new Date(item.date.full).getDate() - day;
 				if(item.countDown == 0) item.countDown = 'Today';
 				else if (item.countDown == 1) item.countDown = 'Tomorrow';
 				else item.countDown = 'In '+item.countDown+' Days';
