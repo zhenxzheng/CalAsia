@@ -1,0 +1,20 @@
+<div class="row">
+	<div class="col-md-12 text-center">
+		<h1>Blog</h1>
+	</div>
+</div>
+<div class="row">
+	<div class="col-md-12">
+		<div class="panel panel-default" style="margin:10px;box-shadow:1px 1px 0 0 rgba(0,0,0,0.3)" ng-repeat="blog in blogs">
+			<div class="panel-body">
+				<h3>[[blog.title]]</h3>
+			</div>
+			<a href="/blog/[[blog._id]]">
+				<div class="panel-footer">
+					Click here to read more...
+					<span class="pull-right">[[blog.date.string]]</span>
+				</div>
+			</a>
+		</div>
+	</div><!-- end col-md-12 -->
+</div><!-- end row-->  

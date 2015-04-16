@@ -37,6 +37,10 @@ angular.module('calasia',['ngRoute','ngSanitize'])
 				templateUrl: 'partials/blog',
 				controller:"blogCtrl"
 			})
+			.when('/blog/:id', {
+				templateUrl: 'partials/blogEntry',
+				controller:"blogCtrl"
+			})
 			.when('/contact',{
 				templateUrl: 'partials/contact'
 			})
@@ -480,10 +484,23 @@ angular.module('calasia',['ngRoute','ngSanitize'])
 				});
 		};
 	})
-	.controller("blogCtrl", function ($scope, $http){
-		$http.get('api/blogs').success(function(data){
-			$scope.blogs = data.blogs;
-		})
+	.controller("blogCtrl", function ($scope, $http, $routeParams){
+		if($routeParams.id==undefined){
+			$http.get('/api/blogs').success(function(data){
+				$scope.blogs = data;
+				console.log(data);
+			})
+		}
+		else{
+			var id = $routeParams.id;
+			$http.get("/api/blog/"+id).success(function(data, status, headers, config){
+				if(data.length==0){
+					data.push({name:"No Entry"});
+				}
+				$scope.blog = data.blog;
+			})
+		}
+		
 	})
 	.controller("addBlogCtrl",function ($scope, $http, $location){
 		$('#editor').wysiwyg();
