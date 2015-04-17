@@ -175,7 +175,7 @@ footer{
   background-color: #1F1F1F;
   border-top: solid 5px #537368;
   color: chocolate;
-  padding: 30px 20px;
+  padding: 30px 15px;
   font-size: 10px;
 }
 
@@ -195,14 +195,9 @@ footer a:hover {
   color: white;
 }
 
-footer .col-md-4:last-child .footerContent{
-  border-right: none;
- 
-}
-
-.footerContent {
+footer .col-md-4:nth-child(2) .footerContent{
+  border-left:solid 1px grey;
   border-right:solid 1px grey;
-
 }
 
 
@@ -390,11 +385,10 @@ body {
    line-height: 30px;
    }
 
-
   .footerContent{
     text-align: center !important;
     margin-bottom:20px;
-    border-right: none;
+    border:none !important;
   }
 
   .footerContent ul{
