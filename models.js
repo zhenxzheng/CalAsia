@@ -15,8 +15,6 @@ var EventSchema = new mongoose.Schema({
 	location:String,//
 	capacity:Number,
 	description:String,//
-	image:[String],
-	speakers:[String],
 	price:Number,//
 	memberPrice:Number,
 	sponsors:[String],

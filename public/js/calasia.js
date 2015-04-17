@@ -324,8 +324,6 @@ angular.module('calasia',['ngRoute','ngSanitize'])
 			if($scope.form.registration.url != undefined){
 				if ($scope.form.registration.url.substring(0,4) != "http") $scope.form.registration.url = "http://"+$scope.form.registration.url;
 			}
-			if($scope.form.images!=undefined) $scope.form.images = $scope.form.images.split(/, */);
-			if($scope.form.speakers!=undefined) $scope.form.speakers = $scope.form.speakers.split(/, */);
 			if($scope.form.sponsors!=undefined) $scope.form.sponsors = $scope.form.sponsors.split(/, */);
 
 			if ($('#editor') !=undefined){
@@ -365,9 +363,7 @@ angular.module('calasia',['ngRoute','ngSanitize'])
 		success(function(data) {
 			$scope.form = data.event;
 			if($scope.form.description != undefined) $('#editor').append($scope.form.description);
-			if($scope.form.speakers!=undefined) $scope.form.speakers = $scope.form.speakers.join(", ");
 			if($scope.form.sponsors!=undefined) $scope.form.sponsors = $scope.form.sponsors.join(", ");
-			if($scope.form.image!=undefined) $scope.form.image = $scope.form.image.join(", ");
 			if($scope.form.date != undefined) $scope.form.date.full = new Date($scope.form.date.full);
 			else $scope.form.date = {};
 			if($scope.form.eventTime != undefined) $scope.form.eventTime.full = new Date($scope.form.eventTime.full);
@@ -400,8 +396,6 @@ angular.module('calasia',['ngRoute','ngSanitize'])
 			if($scope.form.registration.url != undefined){
 				if ($scope.form.registration.url.substring(0,4) != "http") $scope.form.registration.url = "http://"+$scope.form.registration.url;
 			}
-			if($scope.form.images!=undefined) $scope.form.images = $scope.form.images.split(/, */);
-			if($scope.form.speakers!=undefined) $scope.form.speakers = $scope.form.speakers.split(/, */);
 			if($scope.form.sponsors!=undefined) $scope.form.sponsors = $scope.form.sponsors.split(/, */);
 
 			if ($('#editor') !=undefined){
